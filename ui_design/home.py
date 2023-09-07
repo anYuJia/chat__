@@ -1,5 +1,8 @@
 import datetime
-
+import json
+import socket
+import threading
+from multiprocessing import Process
 import wx
 
 import config.config as config
@@ -10,6 +13,8 @@ import ui_design.login as login
 class HomeFrame(wx.Frame):
     def __init__(self, parent, uid):
         super().__init__(parent=None, title="主界面", size=(800, 600))
+        self.conn = None
+        self.port = None
         self.id = 0
         self.uid = uid
         self.Center()
@@ -94,6 +99,46 @@ class HomeFrame(wx.Frame):
         # 加载数据
         self.friend_group_data = ()
         self.load_friend_group_data()
+        self.client = None
+        self.login_socket()
+
+    # 设置端口
+    def check_port_in_use(port, host='127.0.0.1'):
+        s = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
+        try:
+            s.connect((host, port))
+            s.settimeout(1)
+            s.shutdown(2)
+            return True
+        except:
+            return False
+
+    # 登录创建socket连接告诉服务器登录的用户ip,port
+    def login_socket(self):
+        self.server = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
+        for i in range(config.PORT+1, 65535):
+            if not self.check_port_in_use(i):
+                self.port = i
+                break
+        print(self.port)
+        self.server.bind((config.HOST, self.port))
+        self.server.listen()
+        # 创建线程接收连接请求
+        #t = threading.Thread(target=self.accept_connect)
+        # 告诉服务器登录的用户ip,port,uid
+        self.client = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
+        self.client.connect((config.HOST, config.PORT))
+        user = {"uid": self.uid, "type": "login", "ip": config.HOST, "port": self.port}
+        self.client.send(json.dumps(user).encode("utf-8"))
+        #t.start()
+
+    def accept_connect(self):
+        while True:
+            conn, addr = self.server.accept()
+            # 接收连接请求
+            print("等待连接")
+            info = conn.recv(1024).decode('utf-8')
+            print(info)
 
     def on_click_friend_button(self, event):
         friend_username_list = []
@@ -143,7 +188,7 @@ class HomeFrame(wx.Frame):
         self.clear_send_text()
         total = self.Text.GetItemCount()
         indexItem_time = self.Text.InsertItem(total, str(total + 1))
-        indexItem = self.Text.InsertItem(total+1, str(total + 2))
+        indexItem = self.Text.InsertItem(total + 1, str(total + 2))
         self.Text.SetItem(indexItem_time, 0, "")
         self.Text.SetItem(indexItem_time, 1, time)
         self.Text.SetItem(indexItem_time, 2, "")
@@ -153,10 +198,13 @@ class HomeFrame(wx.Frame):
         if self.chat_ing:
             message = config.UserMessage(self.uid, self.id, message, time)
             res.send_message(message)
+            send_message = {"type": "user_message", "uid1": self.uid, "uid2": self.id, "message": message, "time": time}
+            self.client.sendall(json.dumps(send_message).encode('utf-8'))
         else:
             message = config.GroupMessage(self.id, self.uid, message, time)
             res.send_group_message(message)
 
+    # 接收消息
     def receive_message(self, message):
         pass
 
@@ -172,7 +220,7 @@ class HomeFrame(wx.Frame):
         for i in range(len(message_tuple)):
             total = self.Text.GetItemCount()
             indexItem_time = self.Text.InsertItem(total, str(total + 1))
-            indexItem = self.Text.InsertItem(total+1, str(total + 2))
+            indexItem = self.Text.InsertItem(total + 1, str(total + 2))
             # print(message_tuple[i].uid1, self.uid)
             if int(message_tuple[i].uid1) == int(self.uid):
                 self.Text.SetItem(indexItem_time, 0, "")
@@ -202,7 +250,7 @@ class HomeFrame(wx.Frame):
         for i in range(len(message_tuple)):
             total = self.Text.GetItemCount()
             indexItem_time = self.Text.InsertItem(total, str(total + 1))
-            indexItem = self.Text.InsertItem(total+1, str(total + 2))
+            indexItem = self.Text.InsertItem(total + 1, str(total + 2))
             if int(message_tuple[i].uid) == int(self.uid):
                 self.Text.SetItem(indexItem_time, 0, "")
                 self.Text.SetItem(indexItem_time, 1, str(message_tuple[i].time))

@@ -2,6 +2,8 @@ JSON_AS_ASCII = False
 HEIGHT = 500
 WIDTH = 800
 DEFAULT_HEAD_IMG = "file/head_img/user/default_head_img.jpg"
+HOST = "localhost"
+PORT = 1600
 
 
 class RegisterUser():
@@ -46,3 +48,11 @@ class GroupMessage:
         self.uid = uid
         self.message = message
         self.time = time
+
+
+class UserIp:
+    def __init__(self, uid, conn,ip, port):
+        self.uid = uid
+        self.conn = conn
+        self.ip = ip
+        self.port = port

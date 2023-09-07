@@ -1,0 +1,807 @@
+time:2023-09-05 20:08:18,366  - INFO-line:14 - 创建表user成功
+time:2023-09-05 20:08:18,392  - INFO-line:14 - 创建表user_detail成功
+time:2023-09-05 20:08:18,392  - INFO-line:16 - 创建表user_user失败
+time:2023-09-05 20:08:18,392  - ERROR-line:17 - (1064, "You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near 'uid2 )' at line 1")
+time:2023-09-05 20:08:18,392  - ERROR-line:18 - (1064, "You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near 'uid2 )' at line 1")
+Traceback (most recent call last):
+  File "D:\desk\docment\me\3_1\python_program_design\database_control\init_database.py", line 13, in create_table
+    cursor.execute(sql)
+  File "D:\desk\docment\me\3_1\python_program_design\env\lib\site-packages\pymysql\cursors.py", line 153, in execute
+    result = self._query(query)
+  File "D:\desk\docment\me\3_1\python_program_design\env\lib\site-packages\pymysql\cursors.py", line 322, in _query
+    conn.query(q)
+  File "D:\desk\docment\me\3_1\python_program_design\env\lib\site-packages\pymysql\connections.py", line 558, in query
+    self._affected_rows = self._read_query_result(unbuffered=unbuffered)
+  File "D:\desk\docment\me\3_1\python_program_design\env\lib\site-packages\pymysql\connections.py", line 822, in _read_query_result
+    result.read()
+  File "D:\desk\docment\me\3_1\python_program_design\env\lib\site-packages\pymysql\connections.py", line 1200, in read
+    first_packet = self.connection._read_packet()
+  File "D:\desk\docment\me\3_1\python_program_design\env\lib\site-packages\pymysql\connections.py", line 772, in _read_packet
+    packet.raise_for_error()
+  File "D:\desk\docment\me\3_1\python_program_design\env\lib\site-packages\pymysql\protocol.py", line 221, in raise_for_error
+    err.raise_mysql_exception(self._data)
+  File "D:\desk\docment\me\3_1\python_program_design\env\lib\site-packages\pymysql\err.py", line 143, in raise_mysql_exception
+    raise errorclass(errno, errval)
+pymysql.err.ProgrammingError: (1064, "You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near 'uid2 )' at line 1")
+time:2023-09-05 20:08:18,395  - INFO-line:16 - 创建表group失败
+time:2023-09-05 20:08:18,396  - ERROR-line:17 - (1064, "You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near 'group ( gid int(9) AUTO_INCREMENT primary key not null, group_name varchar(10) n' at line 1")
+time:2023-09-05 20:08:18,396  - ERROR-line:18 - (1064, "You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near 'group ( gid int(9) AUTO_INCREMENT primary key not null, group_name varchar(10) n' at line 1")
+Traceback (most recent call last):
+  File "D:\desk\docment\me\3_1\python_program_design\database_control\init_database.py", line 13, in create_table
+    cursor.execute(sql)
+  File "D:\desk\docment\me\3_1\python_program_design\env\lib\site-packages\pymysql\cursors.py", line 153, in execute
+    result = self._query(query)
+  File "D:\desk\docment\me\3_1\python_program_design\env\lib\site-packages\pymysql\cursors.py", line 322, in _query
+    conn.query(q)
+  File "D:\desk\docment\me\3_1\python_program_design\env\lib\site-packages\pymysql\connections.py", line 558, in query
+    self._affected_rows = self._read_query_result(unbuffered=unbuffered)
+  File "D:\desk\docment\me\3_1\python_program_design\env\lib\site-packages\pymysql\connections.py", line 822, in _read_query_result
+    result.read()
+  File "D:\desk\docment\me\3_1\python_program_design\env\lib\site-packages\pymysql\connections.py", line 1200, in read
+    first_packet = self.connection._read_packet()
+  File "D:\desk\docment\me\3_1\python_program_design\env\lib\site-packages\pymysql\connections.py", line 772, in _read_packet
+    packet.raise_for_error()
+  File "D:\desk\docment\me\3_1\python_program_design\env\lib\site-packages\pymysql\protocol.py", line 221, in raise_for_error
+    err.raise_mysql_exception(self._data)
+  File "D:\desk\docment\me\3_1\python_program_design\env\lib\site-packages\pymysql\err.py", line 143, in raise_mysql_exception
+    raise errorclass(errno, errval)
+pymysql.err.ProgrammingError: (1064, "You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near 'group ( gid int(9) AUTO_INCREMENT primary key not null, group_name varchar(10) n' at line 1")
+time:2023-09-05 20:08:18,401  - INFO-line:16 - 创建表user_group失败
+time:2023-09-05 20:08:18,401  - ERROR-line:17 - (1064, "You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near 'uid, )' at line 1")
+time:2023-09-05 20:08:18,401  - ERROR-line:18 - (1064, "You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near 'uid, )' at line 1")
+Traceback (most recent call last):
+  File "D:\desk\docment\me\3_1\python_program_design\database_control\init_database.py", line 13, in create_table
+    cursor.execute(sql)
+  File "D:\desk\docment\me\3_1\python_program_design\env\lib\site-packages\pymysql\cursors.py", line 153, in execute
+    result = self._query(query)
+  File "D:\desk\docment\me\3_1\python_program_design\env\lib\site-packages\pymysql\cursors.py", line 322, in _query
+    conn.query(q)
+  File "D:\desk\docment\me\3_1\python_program_design\env\lib\site-packages\pymysql\connections.py", line 558, in query
+    self._affected_rows = self._read_query_result(unbuffered=unbuffered)
+  File "D:\desk\docment\me\3_1\python_program_design\env\lib\site-packages\pymysql\connections.py", line 822, in _read_query_result
+    result.read()
+  File "D:\desk\docment\me\3_1\python_program_design\env\lib\site-packages\pymysql\connections.py", line 1200, in read
+    first_packet = self.connection._read_packet()
+  File "D:\desk\docment\me\3_1\python_program_design\env\lib\site-packages\pymysql\connections.py", line 772, in _read_packet
+    packet.raise_for_error()
+  File "D:\desk\docment\me\3_1\python_program_design\env\lib\site-packages\pymysql\protocol.py", line 221, in raise_for_error
+    err.raise_mysql_exception(self._data)
+  File "D:\desk\docment\me\3_1\python_program_design\env\lib\site-packages\pymysql\err.py", line 143, in raise_mysql_exception
+    raise errorclass(errno, errval)
+pymysql.err.ProgrammingError: (1064, "You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near 'uid, )' at line 1")
+time:2023-09-05 20:08:18,402  - INFO-line:16 - 创建表user_message失败
+time:2023-09-05 20:08:18,402  - ERROR-line:17 - (1064, "You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near 'datatime not null, primary key uid1,uid2,time )' at line 1")
+time:2023-09-05 20:08:18,402  - ERROR-line:18 - (1064, "You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near 'datatime not null, primary key uid1,uid2,time )' at line 1")
+Traceback (most recent call last):
+  File "D:\desk\docment\me\3_1\python_program_design\database_control\init_database.py", line 13, in create_table
+    cursor.execute(sql)
+  File "D:\desk\docment\me\3_1\python_program_design\env\lib\site-packages\pymysql\cursors.py", line 153, in execute
+    result = self._query(query)
+  File "D:\desk\docment\me\3_1\python_program_design\env\lib\site-packages\pymysql\cursors.py", line 322, in _query
+    conn.query(q)
+  File "D:\desk\docment\me\3_1\python_program_design\env\lib\site-packages\pymysql\connections.py", line 558, in query
+    self._affected_rows = self._read_query_result(unbuffered=unbuffered)
+  File "D:\desk\docment\me\3_1\python_program_design\env\lib\site-packages\pymysql\connections.py", line 822, in _read_query_result
+    result.read()
+  File "D:\desk\docment\me\3_1\python_program_design\env\lib\site-packages\pymysql\connections.py", line 1200, in read
+    first_packet = self.connection._read_packet()
+  File "D:\desk\docment\me\3_1\python_program_design\env\lib\site-packages\pymysql\connections.py", line 772, in _read_packet
+    packet.raise_for_error()
+  File "D:\desk\docment\me\3_1\python_program_design\env\lib\site-packages\pymysql\protocol.py", line 221, in raise_for_error
+    err.raise_mysql_exception(self._data)
+  File "D:\desk\docment\me\3_1\python_program_design\env\lib\site-packages\pymysql\err.py", line 143, in raise_mysql_exception
+    raise errorclass(errno, errval)
+pymysql.err.ProgrammingError: (1064, "You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near 'datatime not null, primary key uid1,uid2,time )' at line 1")
+time:2023-09-05 20:08:18,404  - INFO-line:16 - 创建表group_message失败
+time:2023-09-05 20:08:18,404  - ERROR-line:17 - (1064, "You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near 'datatime not null, primary key gid,uid,time )' at line 1")
+time:2023-09-05 20:08:18,404  - ERROR-line:18 - (1064, "You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near 'datatime not null, primary key gid,uid,time )' at line 1")
+Traceback (most recent call last):
+  File "D:\desk\docment\me\3_1\python_program_design\database_control\init_database.py", line 13, in create_table
+    cursor.execute(sql)
+  File "D:\desk\docment\me\3_1\python_program_design\env\lib\site-packages\pymysql\cursors.py", line 153, in execute
+    result = self._query(query)
+  File "D:\desk\docment\me\3_1\python_program_design\env\lib\site-packages\pymysql\cursors.py", line 322, in _query
+    conn.query(q)
+  File "D:\desk\docment\me\3_1\python_program_design\env\lib\site-packages\pymysql\connections.py", line 558, in query
+    self._affected_rows = self._read_query_result(unbuffered=unbuffered)
+  File "D:\desk\docment\me\3_1\python_program_design\env\lib\site-packages\pymysql\connections.py", line 822, in _read_query_result
+    result.read()
+  File "D:\desk\docment\me\3_1\python_program_design\env\lib\site-packages\pymysql\connections.py", line 1200, in read
+    first_packet = self.connection._read_packet()
+  File "D:\desk\docment\me\3_1\python_program_design\env\lib\site-packages\pymysql\connections.py", line 772, in _read_packet
+    packet.raise_for_error()
+  File "D:\desk\docment\me\3_1\python_program_design\env\lib\site-packages\pymysql\protocol.py", line 221, in raise_for_error
+    err.raise_mysql_exception(self._data)
+  File "D:\desk\docment\me\3_1\python_program_design\env\lib\site-packages\pymysql\err.py", line 143, in raise_mysql_exception
+    raise errorclass(errno, errval)
+pymysql.err.ProgrammingError: (1064, "You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near 'datatime not null, primary key gid,uid,time )' at line 1")
+time:2023-09-05 20:08:18,404  - INFO-line:16 - 创建表group_file失败
+time:2023-09-05 20:08:18,405  - ERROR-line:17 - (1064, "You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near 'datatime not null, primary key gid,uid,time )' at line 1")
+time:2023-09-05 20:08:18,405  - ERROR-line:18 - (1064, "You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near 'datatime not null, primary key gid,uid,time )' at line 1")
+Traceback (most recent call last):
+  File "D:\desk\docment\me\3_1\python_program_design\database_control\init_database.py", line 13, in create_table
+    cursor.execute(sql)
+  File "D:\desk\docment\me\3_1\python_program_design\env\lib\site-packages\pymysql\cursors.py", line 153, in execute
+    result = self._query(query)
+  File "D:\desk\docment\me\3_1\python_program_design\env\lib\site-packages\pymysql\cursors.py", line 322, in _query
+    conn.query(q)
+  File "D:\desk\docment\me\3_1\python_program_design\env\lib\site-packages\pymysql\connections.py", line 558, in query
+    self._affected_rows = self._read_query_result(unbuffered=unbuffered)
+  File "D:\desk\docment\me\3_1\python_program_design\env\lib\site-packages\pymysql\connections.py", line 822, in _read_query_result
+    result.read()
+  File "D:\desk\docment\me\3_1\python_program_design\env\lib\site-packages\pymysql\connections.py", line 1200, in read
+    first_packet = self.connection._read_packet()
+  File "D:\desk\docment\me\3_1\python_program_design\env\lib\site-packages\pymysql\connections.py", line 772, in _read_packet
+    packet.raise_for_error()
+  File "D:\desk\docment\me\3_1\python_program_design\env\lib\site-packages\pymysql\protocol.py", line 221, in raise_for_error
+    err.raise_mysql_exception(self._data)
+  File "D:\desk\docment\me\3_1\python_program_design\env\lib\site-packages\pymysql\err.py", line 143, in raise_mysql_exception
+    raise errorclass(errno, errval)
+pymysql.err.ProgrammingError: (1064, "You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near 'datatime not null, primary key gid,uid,time )' at line 1")
+time:2023-09-05 20:08:18,405  - INFO-line:16 - 创建表user_file失败
+time:2023-09-05 20:08:18,406  - ERROR-line:17 - (1064, "You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near 'datatime not null, primary key uid1,uid2,time )' at line 1")
+time:2023-09-05 20:08:18,406  - ERROR-line:18 - (1064, "You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near 'datatime not null, primary key uid1,uid2,time )' at line 1")
+Traceback (most recent call last):
+  File "D:\desk\docment\me\3_1\python_program_design\database_control\init_database.py", line 13, in create_table
+    cursor.execute(sql)
+  File "D:\desk\docment\me\3_1\python_program_design\env\lib\site-packages\pymysql\cursors.py", line 153, in execute
+    result = self._query(query)
+  File "D:\desk\docment\me\3_1\python_program_design\env\lib\site-packages\pymysql\cursors.py", line 322, in _query
+    conn.query(q)
+  File "D:\desk\docment\me\3_1\python_program_design\env\lib\site-packages\pymysql\connections.py", line 558, in query
+    self._affected_rows = self._read_query_result(unbuffered=unbuffered)
+  File "D:\desk\docment\me\3_1\python_program_design\env\lib\site-packages\pymysql\connections.py", line 822, in _read_query_result
+    result.read()
+  File "D:\desk\docment\me\3_1\python_program_design\env\lib\site-packages\pymysql\connections.py", line 1200, in read
+    first_packet = self.connection._read_packet()
+  File "D:\desk\docment\me\3_1\python_program_design\env\lib\site-packages\pymysql\connections.py", line 772, in _read_packet
+    packet.raise_for_error()
+  File "D:\desk\docment\me\3_1\python_program_design\env\lib\site-packages\pymysql\protocol.py", line 221, in raise_for_error
+    err.raise_mysql_exception(self._data)
+  File "D:\desk\docment\me\3_1\python_program_design\env\lib\site-packages\pymysql\err.py", line 143, in raise_mysql_exception
+    raise errorclass(errno, errval)
+pymysql.err.ProgrammingError: (1064, "You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near 'datatime not null, primary key uid1,uid2,time )' at line 1")
+time:2023-09-05 20:11:34,579  - INFO-line:14 - 创建表user成功
+time:2023-09-05 20:11:34,581  - INFO-line:14 - 创建表user_detail成功
+time:2023-09-05 20:11:34,611  - INFO-line:14 - 创建表user_user成功
+time:2023-09-05 20:11:34,611  - INFO-line:16 - 创建表group失败
+time:2023-09-05 20:11:34,611  - ERROR-line:17 - (1064, "You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near 'group ( gid int(9) AUTO_INCREMENT primary key not null, group_name varchar(10) n' at line 1")
+time:2023-09-05 20:11:34,611  - ERROR-line:18 - (1064, "You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near 'group ( gid int(9) AUTO_INCREMENT primary key not null, group_name varchar(10) n' at line 1")
+Traceback (most recent call last):
+  File "D:\desk\docment\me\3_1\python_program_design\database_control\init_database.py", line 13, in create_table
+    cursor.execute(sql)
+  File "D:\desk\docment\me\3_1\python_program_design\env\lib\site-packages\pymysql\cursors.py", line 153, in execute
+    result = self._query(query)
+  File "D:\desk\docment\me\3_1\python_program_design\env\lib\site-packages\pymysql\cursors.py", line 322, in _query
+    conn.query(q)
+  File "D:\desk\docment\me\3_1\python_program_design\env\lib\site-packages\pymysql\connections.py", line 558, in query
+    self._affected_rows = self._read_query_result(unbuffered=unbuffered)
+  File "D:\desk\docment\me\3_1\python_program_design\env\lib\site-packages\pymysql\connections.py", line 822, in _read_query_result
+    result.read()
+  File "D:\desk\docment\me\3_1\python_program_design\env\lib\site-packages\pymysql\connections.py", line 1200, in read
+    first_packet = self.connection._read_packet()
+  File "D:\desk\docment\me\3_1\python_program_design\env\lib\site-packages\pymysql\connections.py", line 772, in _read_packet
+    packet.raise_for_error()
+  File "D:\desk\docment\me\3_1\python_program_design\env\lib\site-packages\pymysql\protocol.py", line 221, in raise_for_error
+    err.raise_mysql_exception(self._data)
+  File "D:\desk\docment\me\3_1\python_program_design\env\lib\site-packages\pymysql\err.py", line 143, in raise_mysql_exception
+    raise errorclass(errno, errval)
+pymysql.err.ProgrammingError: (1064, "You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near 'group ( gid int(9) AUTO_INCREMENT primary key not null, group_name varchar(10) n' at line 1")
+time:2023-09-05 20:11:34,641  - INFO-line:14 - 创建表user_group成功
+time:2023-09-05 20:11:34,642  - INFO-line:16 - 创建表user_message失败
+time:2023-09-05 20:11:34,642  - ERROR-line:17 - (1064, "You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near 'datatime not null, primary key (uid1,uid2,time) )' at line 1")
+time:2023-09-05 20:11:34,642  - ERROR-line:18 - (1064, "You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near 'datatime not null, primary key (uid1,uid2,time) )' at line 1")
+Traceback (most recent call last):
+  File "D:\desk\docment\me\3_1\python_program_design\database_control\init_database.py", line 13, in create_table
+    cursor.execute(sql)
+  File "D:\desk\docment\me\3_1\python_program_design\env\lib\site-packages\pymysql\cursors.py", line 153, in execute
+    result = self._query(query)
+  File "D:\desk\docment\me\3_1\python_program_design\env\lib\site-packages\pymysql\cursors.py", line 322, in _query
+    conn.query(q)
+  File "D:\desk\docment\me\3_1\python_program_design\env\lib\site-packages\pymysql\connections.py", line 558, in query
+    self._affected_rows = self._read_query_result(unbuffered=unbuffered)
+  File "D:\desk\docment\me\3_1\python_program_design\env\lib\site-packages\pymysql\connections.py", line 822, in _read_query_result
+    result.read()
+  File "D:\desk\docment\me\3_1\python_program_design\env\lib\site-packages\pymysql\connections.py", line 1200, in read
+    first_packet = self.connection._read_packet()
+  File "D:\desk\docment\me\3_1\python_program_design\env\lib\site-packages\pymysql\connections.py", line 772, in _read_packet
+    packet.raise_for_error()
+  File "D:\desk\docment\me\3_1\python_program_design\env\lib\site-packages\pymysql\protocol.py", line 221, in raise_for_error
+    err.raise_mysql_exception(self._data)
+  File "D:\desk\docment\me\3_1\python_program_design\env\lib\site-packages\pymysql\err.py", line 143, in raise_mysql_exception
+    raise errorclass(errno, errval)
+pymysql.err.ProgrammingError: (1064, "You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near 'datatime not null, primary key (uid1,uid2,time) )' at line 1")
+time:2023-09-05 20:11:34,643  - INFO-line:16 - 创建表group_message失败
+time:2023-09-05 20:11:34,643  - ERROR-line:17 - (1064, "You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near 'datatime not null, primary key (gid,uid,time) )' at line 1")
+time:2023-09-05 20:11:34,643  - ERROR-line:18 - (1064, "You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near 'datatime not null, primary key (gid,uid,time) )' at line 1")
+Traceback (most recent call last):
+  File "D:\desk\docment\me\3_1\python_program_design\database_control\init_database.py", line 13, in create_table
+    cursor.execute(sql)
+  File "D:\desk\docment\me\3_1\python_program_design\env\lib\site-packages\pymysql\cursors.py", line 153, in execute
+    result = self._query(query)
+  File "D:\desk\docment\me\3_1\python_program_design\env\lib\site-packages\pymysql\cursors.py", line 322, in _query
+    conn.query(q)
+  File "D:\desk\docment\me\3_1\python_program_design\env\lib\site-packages\pymysql\connections.py", line 558, in query
+    self._affected_rows = self._read_query_result(unbuffered=unbuffered)
+  File "D:\desk\docment\me\3_1\python_program_design\env\lib\site-packages\pymysql\connections.py", line 822, in _read_query_result
+    result.read()
+  File "D:\desk\docment\me\3_1\python_program_design\env\lib\site-packages\pymysql\connections.py", line 1200, in read
+    first_packet = self.connection._read_packet()
+  File "D:\desk\docment\me\3_1\python_program_design\env\lib\site-packages\pymysql\connections.py", line 772, in _read_packet
+    packet.raise_for_error()
+  File "D:\desk\docment\me\3_1\python_program_design\env\lib\site-packages\pymysql\protocol.py", line 221, in raise_for_error
+    err.raise_mysql_exception(self._data)
+  File "D:\desk\docment\me\3_1\python_program_design\env\lib\site-packages\pymysql\err.py", line 143, in raise_mysql_exception
+    raise errorclass(errno, errval)
+pymysql.err.ProgrammingError: (1064, "You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near 'datatime not null, primary key (gid,uid,time) )' at line 1")
+time:2023-09-05 20:11:34,647  - INFO-line:16 - 创建表group_file失败
+time:2023-09-05 20:11:34,647  - ERROR-line:17 - (1064, "You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near 'datatime not null, primary key (gid,uid,time) )' at line 1")
+time:2023-09-05 20:11:34,647  - ERROR-line:18 - (1064, "You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near 'datatime not null, primary key (gid,uid,time) )' at line 1")
+Traceback (most recent call last):
+  File "D:\desk\docment\me\3_1\python_program_design\database_control\init_database.py", line 13, in create_table
+    cursor.execute(sql)
+  File "D:\desk\docment\me\3_1\python_program_design\env\lib\site-packages\pymysql\cursors.py", line 153, in execute
+    result = self._query(query)
+  File "D:\desk\docment\me\3_1\python_program_design\env\lib\site-packages\pymysql\cursors.py", line 322, in _query
+    conn.query(q)
+  File "D:\desk\docment\me\3_1\python_program_design\env\lib\site-packages\pymysql\connections.py", line 558, in query
+    self._affected_rows = self._read_query_result(unbuffered=unbuffered)
+  File "D:\desk\docment\me\3_1\python_program_design\env\lib\site-packages\pymysql\connections.py", line 822, in _read_query_result
+    result.read()
+  File "D:\desk\docment\me\3_1\python_program_design\env\lib\site-packages\pymysql\connections.py", line 1200, in read
+    first_packet = self.connection._read_packet()
+  File "D:\desk\docment\me\3_1\python_program_design\env\lib\site-packages\pymysql\connections.py", line 772, in _read_packet
+    packet.raise_for_error()
+  File "D:\desk\docment\me\3_1\python_program_design\env\lib\site-packages\pymysql\protocol.py", line 221, in raise_for_error
+    err.raise_mysql_exception(self._data)
+  File "D:\desk\docment\me\3_1\python_program_design\env\lib\site-packages\pymysql\err.py", line 143, in raise_mysql_exception
+    raise errorclass(errno, errval)
+pymysql.err.ProgrammingError: (1064, "You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near 'datatime not null, primary key (gid,uid,time) )' at line 1")
+time:2023-09-05 20:11:34,648  - INFO-line:16 - 创建表user_file失败
+time:2023-09-05 20:11:34,648  - ERROR-line:17 - (1064, "You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near 'datatime not null, primary key (uid1,uid2,time) )' at line 1")
+time:2023-09-05 20:11:34,648  - ERROR-line:18 - (1064, "You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near 'datatime not null, primary key (uid1,uid2,time) )' at line 1")
+Traceback (most recent call last):
+  File "D:\desk\docment\me\3_1\python_program_design\database_control\init_database.py", line 13, in create_table
+    cursor.execute(sql)
+  File "D:\desk\docment\me\3_1\python_program_design\env\lib\site-packages\pymysql\cursors.py", line 153, in execute
+    result = self._query(query)
+  File "D:\desk\docment\me\3_1\python_program_design\env\lib\site-packages\pymysql\cursors.py", line 322, in _query
+    conn.query(q)
+  File "D:\desk\docment\me\3_1\python_program_design\env\lib\site-packages\pymysql\connections.py", line 558, in query
+    self._affected_rows = self._read_query_result(unbuffered=unbuffered)
+  File "D:\desk\docment\me\3_1\python_program_design\env\lib\site-packages\pymysql\connections.py", line 822, in _read_query_result
+    result.read()
+  File "D:\desk\docment\me\3_1\python_program_design\env\lib\site-packages\pymysql\connections.py", line 1200, in read
+    first_packet = self.connection._read_packet()
+  File "D:\desk\docment\me\3_1\python_program_design\env\lib\site-packages\pymysql\connections.py", line 772, in _read_packet
+    packet.raise_for_error()
+  File "D:\desk\docment\me\3_1\python_program_design\env\lib\site-packages\pymysql\protocol.py", line 221, in raise_for_error
+    err.raise_mysql_exception(self._data)
+  File "D:\desk\docment\me\3_1\python_program_design\env\lib\site-packages\pymysql\err.py", line 143, in raise_mysql_exception
+    raise errorclass(errno, errval)
+pymysql.err.ProgrammingError: (1064, "You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near 'datatime not null, primary key (uid1,uid2,time) )' at line 1")
+time:2023-09-05 20:15:26,604  - INFO-line:14 - 创建表user成功
+time:2023-09-05 20:15:26,606  - INFO-line:14 - 创建表user_detail成功
+time:2023-09-05 20:15:26,608  - INFO-line:14 - 创建表user_user成功
+time:2023-09-05 20:15:26,609  - INFO-line:16 - 创建表group失败
+time:2023-09-05 20:15:26,609  - ERROR-line:17 - (1064, "You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near 'group ( gid int(9) AUTO_INCREMENT primary key not null, group_name varchar(10) n' at line 1")
+time:2023-09-05 20:15:26,609  - ERROR-line:18 - (1064, "You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near 'group ( gid int(9) AUTO_INCREMENT primary key not null, group_name varchar(10) n' at line 1")
+Traceback (most recent call last):
+  File "D:\desk\docment\me\3_1\python_program_design\database_control\init_database.py", line 13, in create_table
+    cursor.execute(sql)
+  File "D:\desk\docment\me\3_1\python_program_design\env\lib\site-packages\pymysql\cursors.py", line 153, in execute
+    result = self._query(query)
+  File "D:\desk\docment\me\3_1\python_program_design\env\lib\site-packages\pymysql\cursors.py", line 322, in _query
+    conn.query(q)
+  File "D:\desk\docment\me\3_1\python_program_design\env\lib\site-packages\pymysql\connections.py", line 558, in query
+    self._affected_rows = self._read_query_result(unbuffered=unbuffered)
+  File "D:\desk\docment\me\3_1\python_program_design\env\lib\site-packages\pymysql\connections.py", line 822, in _read_query_result
+    result.read()
+  File "D:\desk\docment\me\3_1\python_program_design\env\lib\site-packages\pymysql\connections.py", line 1200, in read
+    first_packet = self.connection._read_packet()
+  File "D:\desk\docment\me\3_1\python_program_design\env\lib\site-packages\pymysql\connections.py", line 772, in _read_packet
+    packet.raise_for_error()
+  File "D:\desk\docment\me\3_1\python_program_design\env\lib\site-packages\pymysql\protocol.py", line 221, in raise_for_error
+    err.raise_mysql_exception(self._data)
+  File "D:\desk\docment\me\3_1\python_program_design\env\lib\site-packages\pymysql\err.py", line 143, in raise_mysql_exception
+    raise errorclass(errno, errval)
+pymysql.err.ProgrammingError: (1064, "You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near 'group ( gid int(9) AUTO_INCREMENT primary key not null, group_name varchar(10) n' at line 1")
+time:2023-09-05 20:15:26,613  - INFO-line:14 - 创建表user_group成功
+time:2023-09-05 20:15:26,614  - INFO-line:16 - 创建表user_message失败
+time:2023-09-05 20:15:26,614  - ERROR-line:17 - (1064, "You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near 'datatime not null, primary key (uid1,uid2,time) )' at line 1")
+time:2023-09-05 20:15:26,614  - ERROR-line:18 - (1064, "You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near 'datatime not null, primary key (uid1,uid2,time) )' at line 1")
+Traceback (most recent call last):
+  File "D:\desk\docment\me\3_1\python_program_design\database_control\init_database.py", line 13, in create_table
+    cursor.execute(sql)
+  File "D:\desk\docment\me\3_1\python_program_design\env\lib\site-packages\pymysql\cursors.py", line 153, in execute
+    result = self._query(query)
+  File "D:\desk\docment\me\3_1\python_program_design\env\lib\site-packages\pymysql\cursors.py", line 322, in _query
+    conn.query(q)
+  File "D:\desk\docment\me\3_1\python_program_design\env\lib\site-packages\pymysql\connections.py", line 558, in query
+    self._affected_rows = self._read_query_result(unbuffered=unbuffered)
+  File "D:\desk\docment\me\3_1\python_program_design\env\lib\site-packages\pymysql\connections.py", line 822, in _read_query_result
+    result.read()
+  File "D:\desk\docment\me\3_1\python_program_design\env\lib\site-packages\pymysql\connections.py", line 1200, in read
+    first_packet = self.connection._read_packet()
+  File "D:\desk\docment\me\3_1\python_program_design\env\lib\site-packages\pymysql\connections.py", line 772, in _read_packet
+    packet.raise_for_error()
+  File "D:\desk\docment\me\3_1\python_program_design\env\lib\site-packages\pymysql\protocol.py", line 221, in raise_for_error
+    err.raise_mysql_exception(self._data)
+  File "D:\desk\docment\me\3_1\python_program_design\env\lib\site-packages\pymysql\err.py", line 143, in raise_mysql_exception
+    raise errorclass(errno, errval)
+pymysql.err.ProgrammingError: (1064, "You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near 'datatime not null, primary key (uid1,uid2,time) )' at line 1")
+time:2023-09-05 20:15:26,614  - INFO-line:16 - 创建表group_message失败
+time:2023-09-05 20:15:26,615  - ERROR-line:17 - (1064, "You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near 'datatime not null, primary key (gid,uid,time) )' at line 1")
+time:2023-09-05 20:15:26,615  - ERROR-line:18 - (1064, "You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near 'datatime not null, primary key (gid,uid,time) )' at line 1")
+Traceback (most recent call last):
+  File "D:\desk\docment\me\3_1\python_program_design\database_control\init_database.py", line 13, in create_table
+    cursor.execute(sql)
+  File "D:\desk\docment\me\3_1\python_program_design\env\lib\site-packages\pymysql\cursors.py", line 153, in execute
+    result = self._query(query)
+  File "D:\desk\docment\me\3_1\python_program_design\env\lib\site-packages\pymysql\cursors.py", line 322, in _query
+    conn.query(q)
+  File "D:\desk\docment\me\3_1\python_program_design\env\lib\site-packages\pymysql\connections.py", line 558, in query
+    self._affected_rows = self._read_query_result(unbuffered=unbuffered)
+  File "D:\desk\docment\me\3_1\python_program_design\env\lib\site-packages\pymysql\connections.py", line 822, in _read_query_result
+    result.read()
+  File "D:\desk\docment\me\3_1\python_program_design\env\lib\site-packages\pymysql\connections.py", line 1200, in read
+    first_packet = self.connection._read_packet()
+  File "D:\desk\docment\me\3_1\python_program_design\env\lib\site-packages\pymysql\connections.py", line 772, in _read_packet
+    packet.raise_for_error()
+  File "D:\desk\docment\me\3_1\python_program_design\env\lib\site-packages\pymysql\protocol.py", line 221, in raise_for_error
+    err.raise_mysql_exception(self._data)
+  File "D:\desk\docment\me\3_1\python_program_design\env\lib\site-packages\pymysql\err.py", line 143, in raise_mysql_exception
+    raise errorclass(errno, errval)
+pymysql.err.ProgrammingError: (1064, "You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near 'datatime not null, primary key (gid,uid,time) )' at line 1")
+time:2023-09-05 20:15:26,619  - INFO-line:16 - 创建表group_file失败
+time:2023-09-05 20:15:26,619  - ERROR-line:17 - (1064, "You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near 'datatime not null, primary key (gid,uid,time) )' at line 1")
+time:2023-09-05 20:15:26,619  - ERROR-line:18 - (1064, "You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near 'datatime not null, primary key (gid,uid,time) )' at line 1")
+Traceback (most recent call last):
+  File "D:\desk\docment\me\3_1\python_program_design\database_control\init_database.py", line 13, in create_table
+    cursor.execute(sql)
+  File "D:\desk\docment\me\3_1\python_program_design\env\lib\site-packages\pymysql\cursors.py", line 153, in execute
+    result = self._query(query)
+  File "D:\desk\docment\me\3_1\python_program_design\env\lib\site-packages\pymysql\cursors.py", line 322, in _query
+    conn.query(q)
+  File "D:\desk\docment\me\3_1\python_program_design\env\lib\site-packages\pymysql\connections.py", line 558, in query
+    self._affected_rows = self._read_query_result(unbuffered=unbuffered)
+  File "D:\desk\docment\me\3_1\python_program_design\env\lib\site-packages\pymysql\connections.py", line 822, in _read_query_result
+    result.read()
+  File "D:\desk\docment\me\3_1\python_program_design\env\lib\site-packages\pymysql\connections.py", line 1200, in read
+    first_packet = self.connection._read_packet()
+  File "D:\desk\docment\me\3_1\python_program_design\env\lib\site-packages\pymysql\connections.py", line 772, in _read_packet
+    packet.raise_for_error()
+  File "D:\desk\docment\me\3_1\python_program_design\env\lib\site-packages\pymysql\protocol.py", line 221, in raise_for_error
+    err.raise_mysql_exception(self._data)
+  File "D:\desk\docment\me\3_1\python_program_design\env\lib\site-packages\pymysql\err.py", line 143, in raise_mysql_exception
+    raise errorclass(errno, errval)
+pymysql.err.ProgrammingError: (1064, "You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near 'datatime not null, primary key (gid,uid,time) )' at line 1")
+time:2023-09-05 20:15:26,620  - INFO-line:16 - 创建表user_file失败
+time:2023-09-05 20:15:26,620  - ERROR-line:17 - (1064, "You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near 'datatime not null, primary key (uid1,uid2,time) )' at line 1")
+time:2023-09-05 20:15:26,620  - ERROR-line:18 - (1064, "You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near 'datatime not null, primary key (uid1,uid2,time) )' at line 1")
+Traceback (most recent call last):
+  File "D:\desk\docment\me\3_1\python_program_design\database_control\init_database.py", line 13, in create_table
+    cursor.execute(sql)
+  File "D:\desk\docment\me\3_1\python_program_design\env\lib\site-packages\pymysql\cursors.py", line 153, in execute
+    result = self._query(query)
+  File "D:\desk\docment\me\3_1\python_program_design\env\lib\site-packages\pymysql\cursors.py", line 322, in _query
+    conn.query(q)
+  File "D:\desk\docment\me\3_1\python_program_design\env\lib\site-packages\pymysql\connections.py", line 558, in query
+    self._affected_rows = self._read_query_result(unbuffered=unbuffered)
+  File "D:\desk\docment\me\3_1\python_program_design\env\lib\site-packages\pymysql\connections.py", line 822, in _read_query_result
+    result.read()
+  File "D:\desk\docment\me\3_1\python_program_design\env\lib\site-packages\pymysql\connections.py", line 1200, in read
+    first_packet = self.connection._read_packet()
+  File "D:\desk\docment\me\3_1\python_program_design\env\lib\site-packages\pymysql\connections.py", line 772, in _read_packet
+    packet.raise_for_error()
+  File "D:\desk\docment\me\3_1\python_program_design\env\lib\site-packages\pymysql\protocol.py", line 221, in raise_for_error
+    err.raise_mysql_exception(self._data)
+  File "D:\desk\docment\me\3_1\python_program_design\env\lib\site-packages\pymysql\err.py", line 143, in raise_mysql_exception
+    raise errorclass(errno, errval)
+pymysql.err.ProgrammingError: (1064, "You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near 'datatime not null, primary key (uid1,uid2,time) )' at line 1")
+time:2023-09-05 20:16:20,463  - INFO-line:14 - 创建表user成功
+time:2023-09-05 20:16:20,465  - INFO-line:14 - 创建表user_detail成功
+time:2023-09-05 20:16:20,467  - INFO-line:14 - 创建表user_user成功
+time:2023-09-05 20:16:20,467  - INFO-line:16 - 创建表group失败
+time:2023-09-05 20:16:20,467  - ERROR-line:17 - (1064, "You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near 'group ( gid int(9) AUTO_INCREMENT primary key not null, group_name varchar(10), ' at line 1")
+time:2023-09-05 20:16:20,467  - ERROR-line:18 - (1064, "You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near 'group ( gid int(9) AUTO_INCREMENT primary key not null, group_name varchar(10), ' at line 1")
+Traceback (most recent call last):
+  File "D:\desk\docment\me\3_1\python_program_design\database_control\init_database.py", line 13, in create_table
+    cursor.execute(sql)
+  File "D:\desk\docment\me\3_1\python_program_design\env\lib\site-packages\pymysql\cursors.py", line 153, in execute
+    result = self._query(query)
+  File "D:\desk\docment\me\3_1\python_program_design\env\lib\site-packages\pymysql\cursors.py", line 322, in _query
+    conn.query(q)
+  File "D:\desk\docment\me\3_1\python_program_design\env\lib\site-packages\pymysql\connections.py", line 558, in query
+    self._affected_rows = self._read_query_result(unbuffered=unbuffered)
+  File "D:\desk\docment\me\3_1\python_program_design\env\lib\site-packages\pymysql\connections.py", line 822, in _read_query_result
+    result.read()
+  File "D:\desk\docment\me\3_1\python_program_design\env\lib\site-packages\pymysql\connections.py", line 1200, in read
+    first_packet = self.connection._read_packet()
+  File "D:\desk\docment\me\3_1\python_program_design\env\lib\site-packages\pymysql\connections.py", line 772, in _read_packet
+    packet.raise_for_error()
+  File "D:\desk\docment\me\3_1\python_program_design\env\lib\site-packages\pymysql\protocol.py", line 221, in raise_for_error
+    err.raise_mysql_exception(self._data)
+  File "D:\desk\docment\me\3_1\python_program_design\env\lib\site-packages\pymysql\err.py", line 143, in raise_mysql_exception
+    raise errorclass(errno, errval)
+pymysql.err.ProgrammingError: (1064, "You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near 'group ( gid int(9) AUTO_INCREMENT primary key not null, group_name varchar(10), ' at line 1")
+time:2023-09-05 20:16:20,472  - INFO-line:14 - 创建表user_group成功
+time:2023-09-05 20:16:20,472  - INFO-line:16 - 创建表user_message失败
+time:2023-09-05 20:16:20,472  - ERROR-line:17 - (1064, "You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near 'datatime not null, primary key (uid1,uid2,time) )' at line 1")
+time:2023-09-05 20:16:20,472  - ERROR-line:18 - (1064, "You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near 'datatime not null, primary key (uid1,uid2,time) )' at line 1")
+Traceback (most recent call last):
+  File "D:\desk\docment\me\3_1\python_program_design\database_control\init_database.py", line 13, in create_table
+    cursor.execute(sql)
+  File "D:\desk\docment\me\3_1\python_program_design\env\lib\site-packages\pymysql\cursors.py", line 153, in execute
+    result = self._query(query)
+  File "D:\desk\docment\me\3_1\python_program_design\env\lib\site-packages\pymysql\cursors.py", line 322, in _query
+    conn.query(q)
+  File "D:\desk\docment\me\3_1\python_program_design\env\lib\site-packages\pymysql\connections.py", line 558, in query
+    self._affected_rows = self._read_query_result(unbuffered=unbuffered)
+  File "D:\desk\docment\me\3_1\python_program_design\env\lib\site-packages\pymysql\connections.py", line 822, in _read_query_result
+    result.read()
+  File "D:\desk\docment\me\3_1\python_program_design\env\lib\site-packages\pymysql\connections.py", line 1200, in read
+    first_packet = self.connection._read_packet()
+  File "D:\desk\docment\me\3_1\python_program_design\env\lib\site-packages\pymysql\connections.py", line 772, in _read_packet
+    packet.raise_for_error()
+  File "D:\desk\docment\me\3_1\python_program_design\env\lib\site-packages\pymysql\protocol.py", line 221, in raise_for_error
+    err.raise_mysql_exception(self._data)
+  File "D:\desk\docment\me\3_1\python_program_design\env\lib\site-packages\pymysql\err.py", line 143, in raise_mysql_exception
+    raise errorclass(errno, errval)
+pymysql.err.ProgrammingError: (1064, "You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near 'datatime not null, primary key (uid1,uid2,time) )' at line 1")
+time:2023-09-05 20:16:20,473  - INFO-line:16 - 创建表group_message失败
+time:2023-09-05 20:16:20,473  - ERROR-line:17 - (1064, "You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near 'datatime not null, primary key (gid,uid,time) )' at line 1")
+time:2023-09-05 20:16:20,473  - ERROR-line:18 - (1064, "You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near 'datatime not null, primary key (gid,uid,time) )' at line 1")
+Traceback (most recent call last):
+  File "D:\desk\docment\me\3_1\python_program_design\database_control\init_database.py", line 13, in create_table
+    cursor.execute(sql)
+  File "D:\desk\docment\me\3_1\python_program_design\env\lib\site-packages\pymysql\cursors.py", line 153, in execute
+    result = self._query(query)
+  File "D:\desk\docment\me\3_1\python_program_design\env\lib\site-packages\pymysql\cursors.py", line 322, in _query
+    conn.query(q)
+  File "D:\desk\docment\me\3_1\python_program_design\env\lib\site-packages\pymysql\connections.py", line 558, in query
+    self._affected_rows = self._read_query_result(unbuffered=unbuffered)
+  File "D:\desk\docment\me\3_1\python_program_design\env\lib\site-packages\pymysql\connections.py", line 822, in _read_query_result
+    result.read()
+  File "D:\desk\docment\me\3_1\python_program_design\env\lib\site-packages\pymysql\connections.py", line 1200, in read
+    first_packet = self.connection._read_packet()
+  File "D:\desk\docment\me\3_1\python_program_design\env\lib\site-packages\pymysql\connections.py", line 772, in _read_packet
+    packet.raise_for_error()
+  File "D:\desk\docment\me\3_1\python_program_design\env\lib\site-packages\pymysql\protocol.py", line 221, in raise_for_error
+    err.raise_mysql_exception(self._data)
+  File "D:\desk\docment\me\3_1\python_program_design\env\lib\site-packages\pymysql\err.py", line 143, in raise_mysql_exception
+    raise errorclass(errno, errval)
+pymysql.err.ProgrammingError: (1064, "You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near 'datatime not null, primary key (gid,uid,time) )' at line 1")
+time:2023-09-05 20:16:20,474  - INFO-line:16 - 创建表group_file失败
+time:2023-09-05 20:16:20,474  - ERROR-line:17 - (1064, "You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near 'datatime not null, primary key (gid,uid,time) )' at line 1")
+time:2023-09-05 20:16:20,474  - ERROR-line:18 - (1064, "You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near 'datatime not null, primary key (gid,uid,time) )' at line 1")
+Traceback (most recent call last):
+  File "D:\desk\docment\me\3_1\python_program_design\database_control\init_database.py", line 13, in create_table
+    cursor.execute(sql)
+  File "D:\desk\docment\me\3_1\python_program_design\env\lib\site-packages\pymysql\cursors.py", line 153, in execute
+    result = self._query(query)
+  File "D:\desk\docment\me\3_1\python_program_design\env\lib\site-packages\pymysql\cursors.py", line 322, in _query
+    conn.query(q)
+  File "D:\desk\docment\me\3_1\python_program_design\env\lib\site-packages\pymysql\connections.py", line 558, in query
+    self._affected_rows = self._read_query_result(unbuffered=unbuffered)
+  File "D:\desk\docment\me\3_1\python_program_design\env\lib\site-packages\pymysql\connections.py", line 822, in _read_query_result
+    result.read()
+  File "D:\desk\docment\me\3_1\python_program_design\env\lib\site-packages\pymysql\connections.py", line 1200, in read
+    first_packet = self.connection._read_packet()
+  File "D:\desk\docment\me\3_1\python_program_design\env\lib\site-packages\pymysql\connections.py", line 772, in _read_packet
+    packet.raise_for_error()
+  File "D:\desk\docment\me\3_1\python_program_design\env\lib\site-packages\pymysql\protocol.py", line 221, in raise_for_error
+    err.raise_mysql_exception(self._data)
+  File "D:\desk\docment\me\3_1\python_program_design\env\lib\site-packages\pymysql\err.py", line 143, in raise_mysql_exception
+    raise errorclass(errno, errval)
+pymysql.err.ProgrammingError: (1064, "You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near 'datatime not null, primary key (gid,uid,time) )' at line 1")
+time:2023-09-05 20:16:20,474  - INFO-line:16 - 创建表user_file失败
+time:2023-09-05 20:16:20,474  - ERROR-line:17 - (1064, "You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near 'datatime not null, primary key (uid1,uid2,time) )' at line 1")
+time:2023-09-05 20:16:20,475  - ERROR-line:18 - (1064, "You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near 'datatime not null, primary key (uid1,uid2,time) )' at line 1")
+Traceback (most recent call last):
+  File "D:\desk\docment\me\3_1\python_program_design\database_control\init_database.py", line 13, in create_table
+    cursor.execute(sql)
+  File "D:\desk\docment\me\3_1\python_program_design\env\lib\site-packages\pymysql\cursors.py", line 153, in execute
+    result = self._query(query)
+  File "D:\desk\docment\me\3_1\python_program_design\env\lib\site-packages\pymysql\cursors.py", line 322, in _query
+    conn.query(q)
+  File "D:\desk\docment\me\3_1\python_program_design\env\lib\site-packages\pymysql\connections.py", line 558, in query
+    self._affected_rows = self._read_query_result(unbuffered=unbuffered)
+  File "D:\desk\docment\me\3_1\python_program_design\env\lib\site-packages\pymysql\connections.py", line 822, in _read_query_result
+    result.read()
+  File "D:\desk\docment\me\3_1\python_program_design\env\lib\site-packages\pymysql\connections.py", line 1200, in read
+    first_packet = self.connection._read_packet()
+  File "D:\desk\docment\me\3_1\python_program_design\env\lib\site-packages\pymysql\connections.py", line 772, in _read_packet
+    packet.raise_for_error()
+  File "D:\desk\docment\me\3_1\python_program_design\env\lib\site-packages\pymysql\protocol.py", line 221, in raise_for_error
+    err.raise_mysql_exception(self._data)
+  File "D:\desk\docment\me\3_1\python_program_design\env\lib\site-packages\pymysql\err.py", line 143, in raise_mysql_exception
+    raise errorclass(errno, errval)
+pymysql.err.ProgrammingError: (1064, "You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near 'datatime not null, primary key (uid1,uid2,time) )' at line 1")
+time:2023-09-05 20:18:36,340  - INFO-line:14 - 创建表user成功
+time:2023-09-05 20:18:36,342  - INFO-line:14 - 创建表user_detail成功
+time:2023-09-05 20:18:36,344  - INFO-line:14 - 创建表user_user成功
+time:2023-09-05 20:18:36,344  - INFO-line:16 - 创建表group失败
+time:2023-09-05 20:18:36,344  - ERROR-line:17 - (1064, "You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near 'group ( gid int(9) AUTO_INCREMENT primary key, group_name varchar(10) not null, ' at line 1")
+time:2023-09-05 20:18:36,344  - ERROR-line:18 - (1064, "You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near 'group ( gid int(9) AUTO_INCREMENT primary key, group_name varchar(10) not null, ' at line 1")
+Traceback (most recent call last):
+  File "D:\desk\docment\me\3_1\python_program_design\database_control\init_database.py", line 13, in create_table
+    cursor.execute(sql)
+  File "D:\desk\docment\me\3_1\python_program_design\env\lib\site-packages\pymysql\cursors.py", line 153, in execute
+    result = self._query(query)
+  File "D:\desk\docment\me\3_1\python_program_design\env\lib\site-packages\pymysql\cursors.py", line 322, in _query
+    conn.query(q)
+  File "D:\desk\docment\me\3_1\python_program_design\env\lib\site-packages\pymysql\connections.py", line 558, in query
+    self._affected_rows = self._read_query_result(unbuffered=unbuffered)
+  File "D:\desk\docment\me\3_1\python_program_design\env\lib\site-packages\pymysql\connections.py", line 822, in _read_query_result
+    result.read()
+  File "D:\desk\docment\me\3_1\python_program_design\env\lib\site-packages\pymysql\connections.py", line 1200, in read
+    first_packet = self.connection._read_packet()
+  File "D:\desk\docment\me\3_1\python_program_design\env\lib\site-packages\pymysql\connections.py", line 772, in _read_packet
+    packet.raise_for_error()
+  File "D:\desk\docment\me\3_1\python_program_design\env\lib\site-packages\pymysql\protocol.py", line 221, in raise_for_error
+    err.raise_mysql_exception(self._data)
+  File "D:\desk\docment\me\3_1\python_program_design\env\lib\site-packages\pymysql\err.py", line 143, in raise_mysql_exception
+    raise errorclass(errno, errval)
+pymysql.err.ProgrammingError: (1064, "You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near 'group ( gid int(9) AUTO_INCREMENT primary key, group_name varchar(10) not null, ' at line 1")
+time:2023-09-05 20:18:36,348  - INFO-line:14 - 创建表user_group成功
+time:2023-09-05 20:18:36,348  - INFO-line:16 - 创建表user_message失败
+time:2023-09-05 20:18:36,348  - ERROR-line:17 - (1064, "You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near 'datatime not null, primary key (uid1,uid2,time) )' at line 1")
+time:2023-09-05 20:18:36,349  - ERROR-line:18 - (1064, "You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near 'datatime not null, primary key (uid1,uid2,time) )' at line 1")
+Traceback (most recent call last):
+  File "D:\desk\docment\me\3_1\python_program_design\database_control\init_database.py", line 13, in create_table
+    cursor.execute(sql)
+  File "D:\desk\docment\me\3_1\python_program_design\env\lib\site-packages\pymysql\cursors.py", line 153, in execute
+    result = self._query(query)
+  File "D:\desk\docment\me\3_1\python_program_design\env\lib\site-packages\pymysql\cursors.py", line 322, in _query
+    conn.query(q)
+  File "D:\desk\docment\me\3_1\python_program_design\env\lib\site-packages\pymysql\connections.py", line 558, in query
+    self._affected_rows = self._read_query_result(unbuffered=unbuffered)
+  File "D:\desk\docment\me\3_1\python_program_design\env\lib\site-packages\pymysql\connections.py", line 822, in _read_query_result
+    result.read()
+  File "D:\desk\docment\me\3_1\python_program_design\env\lib\site-packages\pymysql\connections.py", line 1200, in read
+    first_packet = self.connection._read_packet()
+  File "D:\desk\docment\me\3_1\python_program_design\env\lib\site-packages\pymysql\connections.py", line 772, in _read_packet
+    packet.raise_for_error()
+  File "D:\desk\docment\me\3_1\python_program_design\env\lib\site-packages\pymysql\protocol.py", line 221, in raise_for_error
+    err.raise_mysql_exception(self._data)
+  File "D:\desk\docment\me\3_1\python_program_design\env\lib\site-packages\pymysql\err.py", line 143, in raise_mysql_exception
+    raise errorclass(errno, errval)
+pymysql.err.ProgrammingError: (1064, "You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near 'datatime not null, primary key (uid1,uid2,time) )' at line 1")
+time:2023-09-05 20:18:36,349  - INFO-line:16 - 创建表group_message失败
+time:2023-09-05 20:18:36,349  - ERROR-line:17 - (1064, "You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near 'datatime, primary key (gid,uid,time) )' at line 1")
+time:2023-09-05 20:18:36,349  - ERROR-line:18 - (1064, "You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near 'datatime, primary key (gid,uid,time) )' at line 1")
+Traceback (most recent call last):
+  File "D:\desk\docment\me\3_1\python_program_design\database_control\init_database.py", line 13, in create_table
+    cursor.execute(sql)
+  File "D:\desk\docment\me\3_1\python_program_design\env\lib\site-packages\pymysql\cursors.py", line 153, in execute
+    result = self._query(query)
+  File "D:\desk\docment\me\3_1\python_program_design\env\lib\site-packages\pymysql\cursors.py", line 322, in _query
+    conn.query(q)
+  File "D:\desk\docment\me\3_1\python_program_design\env\lib\site-packages\pymysql\connections.py", line 558, in query
+    self._affected_rows = self._read_query_result(unbuffered=unbuffered)
+  File "D:\desk\docment\me\3_1\python_program_design\env\lib\site-packages\pymysql\connections.py", line 822, in _read_query_result
+    result.read()
+  File "D:\desk\docment\me\3_1\python_program_design\env\lib\site-packages\pymysql\connections.py", line 1200, in read
+    first_packet = self.connection._read_packet()
+  File "D:\desk\docment\me\3_1\python_program_design\env\lib\site-packages\pymysql\connections.py", line 772, in _read_packet
+    packet.raise_for_error()
+  File "D:\desk\docment\me\3_1\python_program_design\env\lib\site-packages\pymysql\protocol.py", line 221, in raise_for_error
+    err.raise_mysql_exception(self._data)
+  File "D:\desk\docment\me\3_1\python_program_design\env\lib\site-packages\pymysql\err.py", line 143, in raise_mysql_exception
+    raise errorclass(errno, errval)
+pymysql.err.ProgrammingError: (1064, "You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near 'datatime, primary key (gid,uid,time) )' at line 1")
+time:2023-09-05 20:18:36,350  - INFO-line:16 - 创建表group_file失败
+time:2023-09-05 20:18:36,350  - ERROR-line:17 - (1064, "You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near 'datatime, primary key (gid,uid,time) )' at line 1")
+time:2023-09-05 20:18:36,350  - ERROR-line:18 - (1064, "You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near 'datatime, primary key (gid,uid,time) )' at line 1")
+Traceback (most recent call last):
+  File "D:\desk\docment\me\3_1\python_program_design\database_control\init_database.py", line 13, in create_table
+    cursor.execute(sql)
+  File "D:\desk\docment\me\3_1\python_program_design\env\lib\site-packages\pymysql\cursors.py", line 153, in execute
+    result = self._query(query)
+  File "D:\desk\docment\me\3_1\python_program_design\env\lib\site-packages\pymysql\cursors.py", line 322, in _query
+    conn.query(q)
+  File "D:\desk\docment\me\3_1\python_program_design\env\lib\site-packages\pymysql\connections.py", line 558, in query
+    self._affected_rows = self._read_query_result(unbuffered=unbuffered)
+  File "D:\desk\docment\me\3_1\python_program_design\env\lib\site-packages\pymysql\connections.py", line 822, in _read_query_result
+    result.read()
+  File "D:\desk\docment\me\3_1\python_program_design\env\lib\site-packages\pymysql\connections.py", line 1200, in read
+    first_packet = self.connection._read_packet()
+  File "D:\desk\docment\me\3_1\python_program_design\env\lib\site-packages\pymysql\connections.py", line 772, in _read_packet
+    packet.raise_for_error()
+  File "D:\desk\docment\me\3_1\python_program_design\env\lib\site-packages\pymysql\protocol.py", line 221, in raise_for_error
+    err.raise_mysql_exception(self._data)
+  File "D:\desk\docment\me\3_1\python_program_design\env\lib\site-packages\pymysql\err.py", line 143, in raise_mysql_exception
+    raise errorclass(errno, errval)
+pymysql.err.ProgrammingError: (1064, "You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near 'datatime, primary key (gid,uid,time) )' at line 1")
+time:2023-09-05 20:18:36,351  - INFO-line:16 - 创建表user_file失败
+time:2023-09-05 20:18:36,351  - ERROR-line:17 - (1064, "You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near 'datatime not null, primary key (uid1,uid2,time) )' at line 1")
+time:2023-09-05 20:18:36,351  - ERROR-line:18 - (1064, "You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near 'datatime not null, primary key (uid1,uid2,time) )' at line 1")
+Traceback (most recent call last):
+  File "D:\desk\docment\me\3_1\python_program_design\database_control\init_database.py", line 13, in create_table
+    cursor.execute(sql)
+  File "D:\desk\docment\me\3_1\python_program_design\env\lib\site-packages\pymysql\cursors.py", line 153, in execute
+    result = self._query(query)
+  File "D:\desk\docment\me\3_1\python_program_design\env\lib\site-packages\pymysql\cursors.py", line 322, in _query
+    conn.query(q)
+  File "D:\desk\docment\me\3_1\python_program_design\env\lib\site-packages\pymysql\connections.py", line 558, in query
+    self._affected_rows = self._read_query_result(unbuffered=unbuffered)
+  File "D:\desk\docment\me\3_1\python_program_design\env\lib\site-packages\pymysql\connections.py", line 822, in _read_query_result
+    result.read()
+  File "D:\desk\docment\me\3_1\python_program_design\env\lib\site-packages\pymysql\connections.py", line 1200, in read
+    first_packet = self.connection._read_packet()
+  File "D:\desk\docment\me\3_1\python_program_design\env\lib\site-packages\pymysql\connections.py", line 772, in _read_packet
+    packet.raise_for_error()
+  File "D:\desk\docment\me\3_1\python_program_design\env\lib\site-packages\pymysql\protocol.py", line 221, in raise_for_error
+    err.raise_mysql_exception(self._data)
+  File "D:\desk\docment\me\3_1\python_program_design\env\lib\site-packages\pymysql\err.py", line 143, in raise_mysql_exception
+    raise errorclass(errno, errval)
+pymysql.err.ProgrammingError: (1064, "You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near 'datatime not null, primary key (uid1,uid2,time) )' at line 1")
+time:2023-09-05 20:20:06,417  - INFO-line:14 - 创建表user成功
+time:2023-09-05 20:20:06,419  - INFO-line:14 - 创建表user_detail成功
+time:2023-09-05 20:20:06,421  - INFO-line:14 - 创建表user_user成功
+time:2023-09-05 20:20:06,422  - INFO-line:16 - 创建表group失败
+time:2023-09-05 20:20:06,422  - ERROR-line:17 - (1064, "You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near 'group ( gid int(9) AUTO_INCREMENT primary key, group_name varchar(10) not null, ' at line 1")
+time:2023-09-05 20:20:06,422  - ERROR-line:18 - (1064, "You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near 'group ( gid int(9) AUTO_INCREMENT primary key, group_name varchar(10) not null, ' at line 1")
+Traceback (most recent call last):
+  File "D:\desk\docment\me\3_1\python_program_design\database_control\init_database.py", line 13, in create_table
+    cursor.execute(sql)
+  File "D:\desk\docment\me\3_1\python_program_design\env\lib\site-packages\pymysql\cursors.py", line 153, in execute
+    result = self._query(query)
+  File "D:\desk\docment\me\3_1\python_program_design\env\lib\site-packages\pymysql\cursors.py", line 322, in _query
+    conn.query(q)
+  File "D:\desk\docment\me\3_1\python_program_design\env\lib\site-packages\pymysql\connections.py", line 558, in query
+    self._affected_rows = self._read_query_result(unbuffered=unbuffered)
+  File "D:\desk\docment\me\3_1\python_program_design\env\lib\site-packages\pymysql\connections.py", line 822, in _read_query_result
+    result.read()
+  File "D:\desk\docment\me\3_1\python_program_design\env\lib\site-packages\pymysql\connections.py", line 1200, in read
+    first_packet = self.connection._read_packet()
+  File "D:\desk\docment\me\3_1\python_program_design\env\lib\site-packages\pymysql\connections.py", line 772, in _read_packet
+    packet.raise_for_error()
+  File "D:\desk\docment\me\3_1\python_program_design\env\lib\site-packages\pymysql\protocol.py", line 221, in raise_for_error
+    err.raise_mysql_exception(self._data)
+  File "D:\desk\docment\me\3_1\python_program_design\env\lib\site-packages\pymysql\err.py", line 143, in raise_mysql_exception
+    raise errorclass(errno, errval)
+pymysql.err.ProgrammingError: (1064, "You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near 'group ( gid int(9) AUTO_INCREMENT primary key, group_name varchar(10) not null, ' at line 1")
+time:2023-09-05 20:20:06,425  - INFO-line:14 - 创建表user_group成功
+time:2023-09-05 20:20:06,425  - INFO-line:16 - 创建表user_message失败
+time:2023-09-05 20:20:06,425  - ERROR-line:17 - (1064, "You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near 'datatime not null, primary key (uid1,uid2,time) )' at line 1")
+time:2023-09-05 20:20:06,426  - ERROR-line:18 - (1064, "You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near 'datatime not null, primary key (uid1,uid2,time) )' at line 1")
+Traceback (most recent call last):
+  File "D:\desk\docment\me\3_1\python_program_design\database_control\init_database.py", line 13, in create_table
+    cursor.execute(sql)
+  File "D:\desk\docment\me\3_1\python_program_design\env\lib\site-packages\pymysql\cursors.py", line 153, in execute
+    result = self._query(query)
+  File "D:\desk\docment\me\3_1\python_program_design\env\lib\site-packages\pymysql\cursors.py", line 322, in _query
+    conn.query(q)
+  File "D:\desk\docment\me\3_1\python_program_design\env\lib\site-packages\pymysql\connections.py", line 558, in query
+    self._affected_rows = self._read_query_result(unbuffered=unbuffered)
+  File "D:\desk\docment\me\3_1\python_program_design\env\lib\site-packages\pymysql\connections.py", line 822, in _read_query_result
+    result.read()
+  File "D:\desk\docment\me\3_1\python_program_design\env\lib\site-packages\pymysql\connections.py", line 1200, in read
+    first_packet = self.connection._read_packet()
+  File "D:\desk\docment\me\3_1\python_program_design\env\lib\site-packages\pymysql\connections.py", line 772, in _read_packet
+    packet.raise_for_error()
+  File "D:\desk\docment\me\3_1\python_program_design\env\lib\site-packages\pymysql\protocol.py", line 221, in raise_for_error
+    err.raise_mysql_exception(self._data)
+  File "D:\desk\docment\me\3_1\python_program_design\env\lib\site-packages\pymysql\err.py", line 143, in raise_mysql_exception
+    raise errorclass(errno, errval)
+pymysql.err.ProgrammingError: (1064, "You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near 'datatime not null, primary key (uid1,uid2,time) )' at line 1")
+time:2023-09-05 20:20:06,426  - INFO-line:16 - 创建表group_message失败
+time:2023-09-05 20:20:06,426  - ERROR-line:17 - (1064, "You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near 'datatime, primary key (gid,uid,time) )' at line 1")
+time:2023-09-05 20:20:06,426  - ERROR-line:18 - (1064, "You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near 'datatime, primary key (gid,uid,time) )' at line 1")
+Traceback (most recent call last):
+  File "D:\desk\docment\me\3_1\python_program_design\database_control\init_database.py", line 13, in create_table
+    cursor.execute(sql)
+  File "D:\desk\docment\me\3_1\python_program_design\env\lib\site-packages\pymysql\cursors.py", line 153, in execute
+    result = self._query(query)
+  File "D:\desk\docment\me\3_1\python_program_design\env\lib\site-packages\pymysql\cursors.py", line 322, in _query
+    conn.query(q)
+  File "D:\desk\docment\me\3_1\python_program_design\env\lib\site-packages\pymysql\connections.py", line 558, in query
+    self._affected_rows = self._read_query_result(unbuffered=unbuffered)
+  File "D:\desk\docment\me\3_1\python_program_design\env\lib\site-packages\pymysql\connections.py", line 822, in _read_query_result
+    result.read()
+  File "D:\desk\docment\me\3_1\python_program_design\env\lib\site-packages\pymysql\connections.py", line 1200, in read
+    first_packet = self.connection._read_packet()
+  File "D:\desk\docment\me\3_1\python_program_design\env\lib\site-packages\pymysql\connections.py", line 772, in _read_packet
+    packet.raise_for_error()
+  File "D:\desk\docment\me\3_1\python_program_design\env\lib\site-packages\pymysql\protocol.py", line 221, in raise_for_error
+    err.raise_mysql_exception(self._data)
+  File "D:\desk\docment\me\3_1\python_program_design\env\lib\site-packages\pymysql\err.py", line 143, in raise_mysql_exception
+    raise errorclass(errno, errval)
+pymysql.err.ProgrammingError: (1064, "You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near 'datatime, primary key (gid,uid,time) )' at line 1")
+time:2023-09-05 20:20:06,431  - INFO-line:16 - 创建表group_file失败
+time:2023-09-05 20:20:06,431  - ERROR-line:17 - (1064, "You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near 'datatime, primary key (gid,uid,time) )' at line 1")
+time:2023-09-05 20:20:06,431  - ERROR-line:18 - (1064, "You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near 'datatime, primary key (gid,uid,time) )' at line 1")
+Traceback (most recent call last):
+  File "D:\desk\docment\me\3_1\python_program_design\database_control\init_database.py", line 13, in create_table
+    cursor.execute(sql)
+  File "D:\desk\docment\me\3_1\python_program_design\env\lib\site-packages\pymysql\cursors.py", line 153, in execute
+    result = self._query(query)
+  File "D:\desk\docment\me\3_1\python_program_design\env\lib\site-packages\pymysql\cursors.py", line 322, in _query
+    conn.query(q)
+  File "D:\desk\docment\me\3_1\python_program_design\env\lib\site-packages\pymysql\connections.py", line 558, in query
+    self._affected_rows = self._read_query_result(unbuffered=unbuffered)
+  File "D:\desk\docment\me\3_1\python_program_design\env\lib\site-packages\pymysql\connections.py", line 822, in _read_query_result
+    result.read()
+  File "D:\desk\docment\me\3_1\python_program_design\env\lib\site-packages\pymysql\connections.py", line 1200, in read
+    first_packet = self.connection._read_packet()
+  File "D:\desk\docment\me\3_1\python_program_design\env\lib\site-packages\pymysql\connections.py", line 772, in _read_packet
+    packet.raise_for_error()
+  File "D:\desk\docment\me\3_1\python_program_design\env\lib\site-packages\pymysql\protocol.py", line 221, in raise_for_error
+    err.raise_mysql_exception(self._data)
+  File "D:\desk\docment\me\3_1\python_program_design\env\lib\site-packages\pymysql\err.py", line 143, in raise_mysql_exception
+    raise errorclass(errno, errval)
+pymysql.err.ProgrammingError: (1064, "You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near 'datatime, primary key (gid,uid,time) )' at line 1")
+time:2023-09-05 20:20:06,432  - INFO-line:16 - 创建表user_file失败
+time:2023-09-05 20:20:06,432  - ERROR-line:17 - (1064, "You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near 'datatime, primary key (uid1,uid2,time) )' at line 1")
+time:2023-09-05 20:20:06,432  - ERROR-line:18 - (1064, "You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near 'datatime, primary key (uid1,uid2,time) )' at line 1")
+Traceback (most recent call last):
+  File "D:\desk\docment\me\3_1\python_program_design\database_control\init_database.py", line 13, in create_table
+    cursor.execute(sql)
+  File "D:\desk\docment\me\3_1\python_program_design\env\lib\site-packages\pymysql\cursors.py", line 153, in execute
+    result = self._query(query)
+  File "D:\desk\docment\me\3_1\python_program_design\env\lib\site-packages\pymysql\cursors.py", line 322, in _query
+    conn.query(q)
+  File "D:\desk\docment\me\3_1\python_program_design\env\lib\site-packages\pymysql\connections.py", line 558, in query
+    self._affected_rows = self._read_query_result(unbuffered=unbuffered)
+  File "D:\desk\docment\me\3_1\python_program_design\env\lib\site-packages\pymysql\connections.py", line 822, in _read_query_result
+    result.read()
+  File "D:\desk\docment\me\3_1\python_program_design\env\lib\site-packages\pymysql\connections.py", line 1200, in read
+    first_packet = self.connection._read_packet()
+  File "D:\desk\docment\me\3_1\python_program_design\env\lib\site-packages\pymysql\connections.py", line 772, in _read_packet
+    packet.raise_for_error()
+  File "D:\desk\docment\me\3_1\python_program_design\env\lib\site-packages\pymysql\protocol.py", line 221, in raise_for_error
+    err.raise_mysql_exception(self._data)
+  File "D:\desk\docment\me\3_1\python_program_design\env\lib\site-packages\pymysql\err.py", line 143, in raise_mysql_exception
+    raise errorclass(errno, errval)
+pymysql.err.ProgrammingError: (1064, "You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near 'datatime, primary key (uid1,uid2,time) )' at line 1")
+time:2023-09-05 20:20:57,111  - INFO-line:14 - 创建表user成功
+time:2023-09-05 20:20:57,113  - INFO-line:14 - 创建表user_detail成功
+time:2023-09-05 20:20:57,114  - INFO-line:14 - 创建表user_user成功
+time:2023-09-05 20:20:57,115  - INFO-line:16 - 创建表group失败
+time:2023-09-05 20:20:57,115  - ERROR-line:17 - (1064, "You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near 'group ( gid int(9) AUTO_INCREMENT primary key, group_name varchar(10) not null, ' at line 1")
+time:2023-09-05 20:20:57,115  - ERROR-line:18 - (1064, "You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near 'group ( gid int(9) AUTO_INCREMENT primary key, group_name varchar(10) not null, ' at line 1")
+Traceback (most recent call last):
+  File "D:\desk\docment\me\3_1\python_program_design\database_control\init_database.py", line 13, in create_table
+    cursor.execute(sql)
+  File "D:\desk\docment\me\3_1\python_program_design\env\lib\site-packages\pymysql\cursors.py", line 153, in execute
+    result = self._query(query)
+  File "D:\desk\docment\me\3_1\python_program_design\env\lib\site-packages\pymysql\cursors.py", line 322, in _query
+    conn.query(q)
+  File "D:\desk\docment\me\3_1\python_program_design\env\lib\site-packages\pymysql\connections.py", line 558, in query
+    self._affected_rows = self._read_query_result(unbuffered=unbuffered)
+  File "D:\desk\docment\me\3_1\python_program_design\env\lib\site-packages\pymysql\connections.py", line 822, in _read_query_result
+    result.read()
+  File "D:\desk\docment\me\3_1\python_program_design\env\lib\site-packages\pymysql\connections.py", line 1200, in read
+    first_packet = self.connection._read_packet()
+  File "D:\desk\docment\me\3_1\python_program_design\env\lib\site-packages\pymysql\connections.py", line 772, in _read_packet
+    packet.raise_for_error()
+  File "D:\desk\docment\me\3_1\python_program_design\env\lib\site-packages\pymysql\protocol.py", line 221, in raise_for_error
+    err.raise_mysql_exception(self._data)
+  File "D:\desk\docment\me\3_1\python_program_design\env\lib\site-packages\pymysql\err.py", line 143, in raise_mysql_exception
+    raise errorclass(errno, errval)
+pymysql.err.ProgrammingError: (1064, "You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near 'group ( gid int(9) AUTO_INCREMENT primary key, group_name varchar(10) not null, ' at line 1")
+time:2023-09-05 20:20:57,118  - INFO-line:14 - 创建表user_group成功
+time:2023-09-05 20:20:57,145  - INFO-line:14 - 创建表user_message成功
+time:2023-09-05 20:20:57,172  - INFO-line:14 - 创建表group_message成功
+time:2023-09-05 20:20:57,201  - INFO-line:14 - 创建表group_file成功
+time:2023-09-05 20:20:57,231  - INFO-line:14 - 创建表user_file成功
+time:2023-09-05 20:32:33,344  - INFO-line:14 - 创建表user成功
+time:2023-09-05 20:32:33,346  - INFO-line:14 - 创建表user_detail成功
+time:2023-09-05 20:32:33,348  - INFO-line:14 - 创建表user_user成功
+time:2023-09-05 20:32:33,351  - INFO-line:14 - 创建表group_detail成功
+time:2023-09-05 20:32:33,353  - INFO-line:14 - 创建表user_group成功
+time:2023-09-05 20:32:33,354  - INFO-line:14 - 创建表user_message成功
+time:2023-09-05 20:32:33,356  - INFO-line:14 - 创建表group_message成功
+time:2023-09-05 20:32:33,358  - INFO-line:14 - 创建表group_file成功
+time:2023-09-05 20:32:33,360  - INFO-line:14 - 创建表user_file成功
+time:2023-09-06 19:16:42,534  - INFO-line:14 - 创建表user成功
+time:2023-09-06 19:16:42,538  - INFO-line:14 - 创建表user_detail成功
+time:2023-09-06 19:16:42,539  - INFO-line:14 - 创建表user_user成功
+time:2023-09-06 19:16:42,540  - INFO-line:14 - 创建表group_detail成功
+time:2023-09-06 19:16:42,540  - INFO-line:14 - 创建表user_group成功
+time:2023-09-06 19:16:42,541  - INFO-line:14 - 创建表user_message成功
+time:2023-09-06 19:16:42,541  - INFO-line:14 - 创建表group_message成功
+time:2023-09-06 19:16:42,542  - INFO-line:14 - 创建表group_file成功
+time:2023-09-06 19:16:42,542  - INFO-line:14 - 创建表user_file成功

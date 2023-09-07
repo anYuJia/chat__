@@ -1,0 +1,79 @@
+[
+  {
+    "备注": "创建用户表 uid、password",
+    "name": "user",
+    "uid": "int(9) AUTO_INCREMENT primary key not null,",
+    "password": "char(255) not null"
+  },
+  {
+    "备注": "创建用户信息表 uid、username、sex、age、phone、email",
+    "name": "user_detail",
+    "uid": "int(9) primary key not null,",
+    "username": "varchar(10) not null,",
+    "head_img": "varchar(255) not null,",
+    "sex": "varchar(2) not null,",
+    "age": "int(3) not null,",
+    "phone": "varchar(11) not null,",
+    "email": "varchar(20) not null"
+  },
+  {
+    "备注": "创建好友表 uid1、uid2",
+    "name": "user_user",
+    "uid1": "int(9) not null,",
+    "uid2": "int(9) not null,",
+    "primary key": "(uid1,uid2)"
+  },
+  {
+    "备注": "创建群组表 gid、group_name、head_img、introduction",
+    "name": "group_detail",
+    "gid": "int(9) AUTO_INCREMENT primary key,",
+    "group_name": "varchar(10) not null,",
+    "head_img": "varchar(255) not null,",
+    "introduction": "varchar(255) not null"
+  },
+  {
+    "备注": "创建群组成员表 gid、uid",
+    "name": "user_group",
+    "gid": "int(9) not null,",
+    "uid": "int(9) not null,",
+    "primary key": "(gid,uid)"
+  },
+  {
+    "备注": "创建好友消息表 uid1、uid2、message、time",
+    "name": "user_message",
+    "uid1": "int(9) not null,",
+    "uid2": "int(9) not null,",
+    "message": "varchar(255) not null,",
+    "time": "datetime not null,",
+    "primary key": "(uid1,uid2,time)"
+  },
+  {
+    "备注": "创建群组消息表 gid、uid、message、time",
+    "name": "group_message",
+    "gid": "int(9) not null,",
+    "uid": "int(9) not null,",
+    "message": "varchar(255) not null,",
+    "time": "datetime not null,",
+    "primary key": "(gid,uid,time)"
+  },
+  {
+    "备注": "创建群组文件表 gid、uid、file_name、file_url、time",
+    "name": "group_file",
+    "gid": "int(9) not null,",
+    "uid": "int(9) not null,",
+    "file_name": "varchar(255) not null,",
+    "file_url": "varchar(255) not null,",
+    "time": "datetime not null,",
+    "primary key": "(gid,uid,time)"
+  },
+  {
+    "备注": "创建好友文件表 uid1、uid2、file_name、file_url、time",
+    "name": "user_file",
+    "uid1": "int(9) not null,",
+    "uid2": "int(9) not null,",
+    "file_name": "varchar(255) not null,",
+    "file_url": "varchar(255) not null,",
+    "time": "datetime not null,",
+    "primary key": "(uid1,uid2,time)"
+  }
+]

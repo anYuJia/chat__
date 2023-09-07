@@ -51,8 +51,7 @@ class GroupMessage:
 
 
 class UserIp:
-    def __init__(self, uid, conn,ip, port):
+    def __init__(self, uid, conn,addr):
         self.uid = uid
         self.conn = conn
-        self.ip = ip
-        self.port = port
+        self.addr = addr

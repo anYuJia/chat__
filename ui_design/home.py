@@ -2,7 +2,8 @@ import datetime
 import json
 import socket
 import threading
-from multiprocessing import Process
+import time
+
 import wx
 
 import config.config as config
@@ -16,7 +17,7 @@ class HomeFrame(wx.Frame):
         self.conn = None
         self.port = None
         self.id = 0
-        self.uid = uid
+        self.uid = int(uid)
         self.Center()
         self.sp = wx.SplitterWindow(self)
         # 创建左子面板
@@ -101,44 +102,14 @@ class HomeFrame(wx.Frame):
         self.load_friend_group_data()
         self.client = None
         self.login_socket()
-
-    # 设置端口
-    def check_port_in_use(port, host='127.0.0.1'):
-        s = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
-        try:
-            s.connect((host, port))
-            s.settimeout(1)
-            s.shutdown(2)
-            return True
-        except:
-            return False
+        self.listen_receive_message()
 
     # 登录创建socket连接告诉服务器登录的用户ip,port
     def login_socket(self):
-        self.server = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
-        for i in range(config.PORT+1, 65535):
-            if not self.check_port_in_use(i):
-                self.port = i
-                break
-        print(self.port)
-        self.server.bind((config.HOST, self.port))
-        self.server.listen()
-        # 创建线程接收连接请求
-        #t = threading.Thread(target=self.accept_connect)
-        # 告诉服务器登录的用户ip,port,uid
         self.client = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
         self.client.connect((config.HOST, config.PORT))
-        user = {"uid": self.uid, "type": "login", "ip": config.HOST, "port": self.port}
+        user = {"uid": self.uid, "type": "login"}
         self.client.send(json.dumps(user).encode("utf-8"))
-        #t.start()
-
-    def accept_connect(self):
-        while True:
-            conn, addr = self.server.accept()
-            # 接收连接请求
-            print("等待连接")
-            info = conn.recv(1024).decode('utf-8')
-            print(info)
 
     def on_click_friend_button(self, event):
         friend_username_list = []
@@ -181,7 +152,11 @@ class HomeFrame(wx.Frame):
     def clear_send_text(self):
         self.Input.Clear()
 
-    # 发送消息
+    def listen_receive_message(self):
+        # 创建子进程监听
+        p = threading.Thread(target=self.receive_message)
+        p.start()
+
     def send_message(self, event):
         time = datetime.datetime.now().strftime('%Y-%m-%d %H:%M:%S')
         message = self.get_send_text()
@@ -198,15 +173,40 @@ class HomeFrame(wx.Frame):
         if self.chat_ing:
             message = config.UserMessage(self.uid, self.id, message, time)
             res.send_message(message)
-            send_message = {"type": "user_message", "uid1": self.uid, "uid2": self.id, "message": message, "time": time}
+            send_message = {"type": "user_message", "uid1": self.uid, "uid2": self.id, "message": message.message,
+                            "time": time}
             self.client.sendall(json.dumps(send_message).encode('utf-8'))
         else:
             message = config.GroupMessage(self.id, self.uid, message, time)
             res.send_group_message(message)
 
-    # 接收消息
-    def receive_message(self, message):
-        pass
+    def receive_message(self):
+        while True:
+            time.sleep(1)
+            data = self.client.recv(1024).decode('utf-8')
+            data = json.loads(data)
+            if data['type'] == 'user_message':
+                if int(data['uid1']) == self.id and int(data['uid2']) == int(self.uid):
+                    total = self.Text.GetItemCount()
+                    indexItem_time = self.Text.InsertItem(total, str(total + 1))
+                    indexItem = self.Text.InsertItem(total + 1, str(total + 2))
+                    self.Text.SetItem(indexItem_time, 0, "")
+                    self.Text.SetItem(indexItem_time, 1, data['time'])
+                    self.Text.SetItem(indexItem_time, 2, "")
+                    self.Text.SetItem(indexItem, 0, "对方")
+                    self.Text.SetItem(indexItem, 1, data['message'])
+                    self.Text.SetItem(indexItem, 2, '')
+            elif data['type'] == 'group_message':
+                if data['gid'] == self.id and data['uid'] != self.uid:
+                    total = self.Text.GetItemCount()
+                    indexItem_time = self.Text.InsertItem(total, str(total + 1))
+                    indexItem = self.Text.InsertItem(total + 1, str(total + 2))
+                    self.Text.SetItem(indexItem_time, 0, "")
+                    self.Text.SetItem(indexItem_time, 1, data['time'])
+                    self.Text.SetItem(indexItem_time, 2, "")
+                    self.Text.SetItem(indexItem, 0, "")
+                    self.Text.SetItem(indexItem, 1, data['message'])
+                    self.Text.SetItem(indexItem, 2, data['uid1'])
 
     # 加载好友群聊列表数据
     def load_friend_group_data(self):
@@ -221,7 +221,6 @@ class HomeFrame(wx.Frame):
             total = self.Text.GetItemCount()
             indexItem_time = self.Text.InsertItem(total, str(total + 1))
             indexItem = self.Text.InsertItem(total + 1, str(total + 2))
-            # print(message_tuple[i].uid1, self.uid)
             if int(message_tuple[i].uid1) == int(self.uid):
                 self.Text.SetItem(indexItem_time, 0, "")
                 self.Text.SetItem(indexItem_time, 1, str(message_tuple[i].time))

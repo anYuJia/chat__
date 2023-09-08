@@ -72,7 +72,7 @@ def Login(user, password) -> (bool, int):
             return False, 0
 
 
-def refresh_left_list(uid) -> (tuple, tuple):
+def refresh_left_list(uid) -> [list, list]:
     # 获取数据库句柄
     DB = db.connect_mysql()
     cursor = DB[1]
@@ -96,17 +96,17 @@ def refresh_left_list(uid) -> (tuple, tuple):
             continue
         if user_detail.uid == int(uid):
             continue
-        friend_info_list.append(user_detail)
-    friend_list = tuple(friend_info_list)
+        friend_info_list.append(obj_to_dict(user_detail))
+    friend_list = list(friend_info_list)
     # 通过uid查询群列表
     get_group_list_sql = "select group_detail.gid,group_name,head_img,introduction from group_detail,user_group where user_group.gid = group_detail.gid and uid = %s"
     cursor.execute(get_group_list_sql, (uid,))
     group_list = cursor.fetchall()
-    group_info_list = tuple([config.GroupDetail(*i) for i in group_list])
-    return friend_list, group_info_list
+    group_info_list = list([obj_to_dict(config.GroupDetail(*i)) for i in group_list])
+    return [friend_list, group_info_list]
 
 
-def send_message(message) -> bool:
+def story_send_message(message) -> bool:
     DB = db.connect_mysql()
     try:
         # 获取数据库句柄
@@ -123,7 +123,7 @@ def send_message(message) -> bool:
         return False
 
 
-def send_group_message(message) -> bool:
+def story_send_group_message(message) -> bool:
     DB = db.connect_mysql()
     try:
         # 获取数据库句柄
@@ -140,24 +140,31 @@ def send_group_message(message) -> bool:
         return False
 
 
-def get_user_message(uid1, uid2) -> tuple:
+def get_user_message(uid1, uid2) -> list:
     DB = db.connect_mysql()
     cursor = DB[1]
     get_message_sql = "select * from user_message where uid1 = %s and uid2 = %s or uid1 = %s and uid2 = %s order by time asc"
     cursor.execute(get_message_sql, (uid1, uid2, uid2, uid1))
     message_list = cursor.fetchall()
-    message_list = tuple([config.UserMessage(*i) for i in message_list])
+    message_list = list([obj_to_dict(config.UserMessage(*i)) for i in message_list])
+    # 将时间datetime.datetime(*******)转换为字符串
+    for message in message_list:
+        message['time'] = message['time'].strftime("%Y-%m-%d %H:%M:%S")
     db.close_cursor(DB)
     return message_list
 
 
-def get_group_message(gid) -> tuple:
+def get_group_message(gid) -> list:
     DB = db.connect_mysql()
     cursor = DB[1]
     get_message_sql = "select * from group_message where gid = %s order by time asc"
     cursor.execute(get_message_sql, (gid,))
     message_list = cursor.fetchall()
-    message_list = tuple([config.GroupMessage(*i) for i in message_list])
+    message_list = list([obj_to_dict(config.GroupMessage(*i)) for i in message_list])
+    # 将时间datetime.datetime(*******)转换为字符串
+    for message in message_list:
+        message["time"] = message["time"].strftime("%Y-%m-%d %H:%M:%S")
+        message["username"] = get_user_name(message["uid"])
     db.close_cursor(DB)
     return message_list
 
@@ -170,3 +177,33 @@ def get_user_name(uid) -> str:
     username = cursor.fetchone()[0]
     db.close_cursor(DB)
     return username
+
+
+def get_group_name(gid) -> str:
+    DB = db.connect_mysql()
+    cursor = DB[1]
+    get_group_name_sql = "select group_name from group_detail where gid = %s"
+    cursor.execute(get_group_name_sql, (gid,))
+    group_name = cursor.fetchone()[0]
+    db.close_cursor(DB)
+    return group_name
+
+
+# 获取群聊成员
+def get_group_member(gid) -> tuple:
+    DB = db.connect_mysql()
+    cursor = DB[1]
+    get_online_group_member_sql = "select uid from user_group where gid = %s"
+    cursor.execute(get_online_group_member_sql, (gid,))
+    online_group_member = cursor.fetchall()
+    online_group_member = tuple([i[0] for i in online_group_member])
+    db.close_cursor(DB)
+    return online_group_member
+
+
+# 将对象转化为字典
+def obj_to_dict(obj):
+    obj_dict = {}
+    for i in obj.__dict__:
+        obj_dict[i] = obj.__dict__[i]
+    return obj_dict

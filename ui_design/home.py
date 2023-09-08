@@ -7,7 +7,6 @@ import time
 import wx
 
 import config.config as config
-import res.func as res
 import ui_design.login as login
 
 
@@ -18,6 +17,10 @@ class HomeFrame(wx.Frame):
         self.port = None
         self.id = 0
         self.uid = int(uid)
+        self.client = None
+        self.login_socket()
+        self.Bind(wx.EVT_CLOSE, self.on_close_window)
+        self.chat_msg = []
         self.Center()
         self.sp = wx.SplitterWindow(self)
         # 创建左子面板
@@ -98,10 +101,8 @@ class HomeFrame(wx.Frame):
         self.chat_ing = True
         #
         # 加载数据
-        self.friend_group_data = ()
+        self.friend_group_data = [[], []]
         self.load_friend_group_data()
-        self.client = None
-        self.login_socket()
         self.listen_receive_message()
 
     # 登录创建socket连接告诉服务器登录的用户ip,port
@@ -113,15 +114,17 @@ class HomeFrame(wx.Frame):
 
     def on_click_friend_button(self, event):
         friend_username_list = []
-        for i in range(len(self.friend_group_data[0])):
-            friend_username_list.append(self.friend_group_data[0][i].username)
+        if self.friend_group_data[0] is not None:
+            for i in range(len(self.friend_group_data[0])):
+                friend_username_list.append(self.friend_group_data[0][i]["username"])
         friend_list = friend_username_list
         self.SList.Set(friend_list)
 
     def on_click_group_button(self, event):
         group_name_list = []
-        for i in range(len(self.friend_group_data[1])):
-            group_name_list.append(self.friend_group_data[1][i].group_name)
+        if self.friend_group_data[1] is not None:
+            for i in range(len(self.friend_group_data[1])):
+                group_name_list.append(self.friend_group_data[1][i]["group_name"])
         group_list = group_name_list
         self.SList.Set(group_list)
 
@@ -132,15 +135,15 @@ class HomeFrame(wx.Frame):
         # 获取好友id或者群聊id
         # 设置聊天状态True为与好友聊天，False为与群聊聊天
         for i in range(len(self.friend_group_data[0])):
-            if self.friend_group_data[0][i].username == event.GetString():
-                self.id = self.friend_group_data[0][i].uid
+            if self.friend_group_data[0][i]["username"] == event.GetString():
+                self.id = self.friend_group_data[0][i]["uid"]
                 self.load_friend_message()
                 self.chat_ing = True
                 break
 
         for i in range(len(self.friend_group_data[1])):
-            if self.friend_group_data[1][i].group_name == event.GetString():
-                self.id = self.friend_group_data[1][i].gid
+            if self.friend_group_data[1][i]["group_name"] == event.GetString():
+                self.id = self.friend_group_data[1][i]["gid"]
                 self.load_group_message()
                 self.chat_ing = False
                 break
@@ -171,100 +174,135 @@ class HomeFrame(wx.Frame):
         self.Text.SetItem(indexItem, 1, message)
         self.Text.SetItem(indexItem, 2, "我")
         if self.chat_ing:
-            message = config.UserMessage(self.uid, self.id, message, time)
-            res.send_message(message)
-            send_message = {"type": "user_message", "uid1": self.uid, "uid2": self.id, "message": message.message,
+            send_message = {"type": "user_message", "uid1": self.uid, "uid2": self.id, "message": message,
                             "time": time}
             self.client.sendall(json.dumps(send_message).encode('utf-8'))
         else:
-            message = config.GroupMessage(self.id, self.uid, message, time)
-            res.send_group_message(message)
+            send_message = {"type": "group_message", "gid": self.id, "uid": self.uid, "message": message,
+                            "time": time}
+            self.client.sendall(json.dumps(send_message).encode('utf-8'))
 
     def receive_message(self):
         while True:
-            time.sleep(1)
-            data = self.client.recv(1024).decode('utf-8')
-            data = json.loads(data)
-            if data['type'] == 'user_message':
-                if int(data['uid1']) == self.id and int(data['uid2']) == int(self.uid):
-                    total = self.Text.GetItemCount()
-                    indexItem_time = self.Text.InsertItem(total, str(total + 1))
-                    indexItem = self.Text.InsertItem(total + 1, str(total + 2))
-                    self.Text.SetItem(indexItem_time, 0, "")
-                    self.Text.SetItem(indexItem_time, 1, data['time'])
-                    self.Text.SetItem(indexItem_time, 2, "")
-                    self.Text.SetItem(indexItem, 0, "对方")
-                    self.Text.SetItem(indexItem, 1, data['message'])
-                    self.Text.SetItem(indexItem, 2, '')
-            elif data['type'] == 'group_message':
-                if data['gid'] == self.id and data['uid'] != self.uid:
-                    total = self.Text.GetItemCount()
-                    indexItem_time = self.Text.InsertItem(total, str(total + 1))
-                    indexItem = self.Text.InsertItem(total + 1, str(total + 2))
-                    self.Text.SetItem(indexItem_time, 0, "")
-                    self.Text.SetItem(indexItem_time, 1, data['time'])
-                    self.Text.SetItem(indexItem_time, 2, "")
-                    self.Text.SetItem(indexItem, 0, "")
-                    self.Text.SetItem(indexItem, 1, data['message'])
-                    self.Text.SetItem(indexItem, 2, data['uid1'])
+            try:
+                data = self.client.recv(1024 * 3).decode('utf-8')
+                data = json.loads(data)
+                print(data)
+                if data['type'] == 'user_message':
+                    if int(data['uid1']) == self.id and int(data['uid2']) == int(self.uid):
+                        total = self.Text.GetItemCount()
+                        indexItem_time = self.Text.InsertItem(total, str(total + 1))
+                        indexItem = self.Text.InsertItem(total + 1, str(total + 2))
+                        self.Text.SetItem(indexItem_time, 0, "")
+                        self.Text.SetItem(indexItem_time, 1, data['time'])
+                        self.Text.SetItem(indexItem_time, 2, "")
+                        self.Text.SetItem(indexItem, 0, "对方")
+                        self.Text.SetItem(indexItem, 1, data['message'])
+                        self.Text.SetItem(indexItem, 2, '')
+                elif data['type'] == 'group_message':
+                    if int(data['gid']) == self.id:
+                        total = self.Text.GetItemCount()
+                        indexItem_time = self.Text.InsertItem(total, str(total + 1))
+                        indexItem = self.Text.InsertItem(total + 1, str(total + 2))
+                        self.Text.SetItem(indexItem_time, 0, "")
+                        self.Text.SetItem(indexItem_time, 1, data['time'])
+                        self.Text.SetItem(indexItem_time, 2, "")
+                        # 发消息的user的uid为data['uid']，此时还不知道有无有用，先留着
+                        self.Text.SetItem(indexItem, 0, str(data["username"]))
+                        self.Text.SetItem(indexItem, 1, data['message'])
+                        self.Text.SetItem(indexItem, 2, "")
+                elif data['type'] == 'friend_group_data':
+                    self.friend_group_data = data['data']
+                    self.on_click_friend_button(self.friend_button)
+                elif data['type'] == 'user_message_list':
+                    self.set_user_message(data['data'])
+                elif data['type'] == 'group_message_list':
+                    self.set_group_message(data['data'])
+                time.sleep(0.5)
+            except:
+                continue
 
     # 加载好友群聊列表数据
     def load_friend_group_data(self):
-        self.friend_group_data = res.refresh_left_list(self.uid)
-        self.on_click_friend_button(self.friend_button)
+        # 发送消息给服务器，获取好友列表
+        message = {"type": "get_friend_group_data", "uid": self.uid}
+        self.client.sendall(json.dumps(message).encode('utf-8'))
 
-    # 加载消息
+    # 请求私聊消息
     def load_friend_message(self):
-        message_tuple = res.get_user_message(self.uid, self.id)
+        # 发送消息给服务器，获取聊天记录
+        message = {"type": "get_user_message", "uid1": self.uid, "uid2": self.id}
+        self.client.sendall(json.dumps(message).encode('utf-8'))
+
+    # 加载用户聊天记录
+    def set_user_message(self, message_list):
         self.Text.DeleteAllItems()
-        for i in range(len(message_tuple)):
+        for i in range(len(message_list)):
             total = self.Text.GetItemCount()
             indexItem_time = self.Text.InsertItem(total, str(total + 1))
             indexItem = self.Text.InsertItem(total + 1, str(total + 2))
-            if int(message_tuple[i].uid1) == int(self.uid):
+            if int(message_list[i]["uid1"]) == int(self.uid):
                 self.Text.SetItem(indexItem_time, 0, "")
-                self.Text.SetItem(indexItem_time, 1, str(message_tuple[i].time))
+                self.Text.SetItem(indexItem_time, 1, str(message_list[i]["time"]))
                 self.Text.SetItem(indexItem_time, 2, "")
                 self.Text.SetItem(indexItem, 0, "")
-                self.Text.SetItem(indexItem, 1, message_tuple[i].message)
+                self.Text.SetItem(indexItem, 1, message_list[i]["message"])
                 self.Text.SetItem(indexItem, 2, "我")
             else:
                 self.Text.SetItem(indexItem_time, 0, "")
-                self.Text.SetItem(indexItem_time, 1, str(message_tuple[i].time))
+                self.Text.SetItem(indexItem_time, 1, str(message_list[i]["time"]))
                 self.Text.SetItem(indexItem_time, 2, "")
                 self.Text.SetItem(indexItem, 0, "对方")
-                self.Text.SetItem(indexItem, 1, message_tuple[i].message)
+                self.Text.SetItem(indexItem, 1, message_list[i]["message"])
                 self.Text.SetItem(indexItem, 2, "")
 
     def back_to_login(self, event):
-        self.Close(True)
+        self.on_close_window(event)
         app = wx.App()
         frame = login.LoginFrame(None, self.uid, None)
         frame.Show(True)
         app.MainLoop()
 
     def load_group_message(self):
-        message_tuple = res.get_group_message(self.id)
+        message = {"type": "get_group_message", "gid": self.id, "uid": self.uid}
+        self.client.send(json.dumps(message).encode('utf-8'))
+
+    def set_group_message(self, message_list):
         self.Text.DeleteAllItems()
-        for i in range(len(message_tuple)):
+        for i in range(len(message_list)):
             total = self.Text.GetItemCount()
             indexItem_time = self.Text.InsertItem(total, str(total + 1))
             indexItem = self.Text.InsertItem(total + 1, str(total + 2))
-            if int(message_tuple[i].uid) == int(self.uid):
+            if int(message_list[i]['uid']) == int(self.uid):
                 self.Text.SetItem(indexItem_time, 0, "")
-                self.Text.SetItem(indexItem_time, 1, str(message_tuple[i].time))
+                self.Text.SetItem(indexItem_time, 1, str(message_list[i]['time']))
                 self.Text.SetItem(indexItem_time, 2, "")
                 self.Text.SetItem(indexItem, 0, "")
-                self.Text.SetItem(indexItem, 1, message_tuple[i].message)
+                self.Text.SetItem(indexItem, 1, message_list[i]['message'])
                 self.Text.SetItem(indexItem, 2, "我")
             else:
-                send_name = res.get_user_name(message_tuple[i].uid)
                 self.Text.SetItem(indexItem_time, 0, "")
-                self.Text.SetItem(indexItem_time, 1, str(message_tuple[i].time))
+                self.Text.SetItem(indexItem_time, 1, str(message_list[i]['time']))
                 self.Text.SetItem(indexItem_time, 2, "")
-                self.Text.SetItem(indexItem, 0, send_name)
-                self.Text.SetItem(indexItem, 1, message_tuple[i].message)
+                self.Text.SetItem(indexItem, 0, str(message_list[i]['username']))
+                self.Text.SetItem(indexItem, 1, message_list[i]['message'])
                 self.Text.SetItem(indexItem, 2, "")
+
+    # 检测窗口关闭事件
+    def on_close_window(self, event):
+        toastone = wx.MessageDialog(None, "确定要退出系统吗？", "确认信息提示",
+                                    wx.YES_NO | wx.ICON_QUESTION)
+        if toastone.ShowModal() == wx.ID_YES:  # 如果点击了提示框的确定按钮
+            toastone.Destroy()  # 则关闭提示框
+            self.logout()
+        if toastone.ShowModal() == wx.ID_NO:
+            toastone.Destroy()  # 则关闭提示框
+
+    # 退出登录，告诉服务器此账号已下线
+    def logout(self):
+        self.client.sendall(json.dumps({"type": "logout", "uid": self.uid}).encode('utf-8'))
+        self.client.close()
+        self.Destroy()
 
 
 if __name__ == '__main__':

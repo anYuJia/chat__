@@ -2,6 +2,7 @@ import json
 import socket
 import threading
 import time
+
 import config.config as config
 import res.func as func
 
@@ -103,7 +104,60 @@ def send_group_message_list(info_json):
     message = {'type': 'group_message_list', 'data': group_message_list}
     for user in user_list:
         if int(user.uid) == int(info_json['uid']):
-            print(message)
+            user.conn.sendall(json.dumps(message).encode('utf-8'))
+            break
+
+
+# 发送好友信息
+def send_friend_info(info_json):
+    friend_info = func.get_user_info(info_json['uid2'])
+    message = {'type': 'friend_info', 'data': friend_info}
+    for user in user_list:
+        if int(user.uid) == int(info_json['uid']):
+            user.conn.sendall(json.dumps(message).encode('utf-8'))
+            break
+
+
+# 发送群聊信息
+def send_group_info(info_json):
+    group_info = func.get_group_info(info_json['gid'])
+    message = {'type': 'group_info', 'data': group_info}
+    for user in user_list:
+        if int(user.uid) == int(info_json['uid']):
+            user.conn.sendall(json.dumps(message).encode('utf-8'))
+            break
+
+
+# 添加好友请求
+def add_friend_request(info_json):
+    message = "未知错误"
+    if not func.check_user_exist(info_json['uid1'], info_json['uid1'], info_json['uid1']):
+        message = {'type': 'add_friend_result', 'data': '不存在该用户', "code": 0, "uid": info_json['uid1']}
+    elif func.check_friend(info_json['uid'], info_json['uid1']):
+        message = {'type': 'add_friend_result', 'data': '已经是好友', "code": 0, "uid": info_json['uid1']}
+    elif func.add_friend(info_json['uid'], info_json['uid1']):
+        message = {'type': 'add_friend_result', 'data': 'success', "code": 1, "uid": info_json['uid1'],
+                   'username': func.get_user_name(info_json['uid1'])}
+    for user in user_list:
+        if int(user.uid) == int(info_json['uid']):
+            user.conn.sendall(json.dumps(message).encode('utf-8'))
+            break
+
+
+# 添加群聊请求
+def add_group_request(info_json):
+    message = "未知错误"
+    if info_json['uid'] == info_json['uid1']:
+        message = {'type': 'add_group_result', 'data': '不能添加自己', "code": 0, "gid": info_json['gid']}
+    if not func.check_group_exist(info_json['gid']):
+        message = {'type': 'add_group_result', 'data': '不存在该群聊', "code": 0, "gid": info_json['gid']}
+    elif func.check_group(info_json['uid'], info_json['gid']):
+        message = {'type': 'add_group_result', 'data': '已经在群聊中', "code": 0, "gid": info_json['gid']}
+    elif func.add_group(info_json['uid'], info_json['gid']):
+        message = {'type': 'add_group_result', 'data': 'success', "code": 1, "gid": info_json['gid'],
+                   'group_name': func.get_group_name(info_json['gid'])}
+    for user in user_list:
+        if int(user.uid) == int(info_json['uid']):
             user.conn.sendall(json.dumps(message).encode('utf-8'))
             break
 
@@ -122,6 +176,14 @@ def work(info_json):
         send_user_message_list(info_json)
     elif info_json['type'] == 'get_group_message':
         send_group_message_list(info_json)
+    elif info_json['type'] == 'get_friend_info':
+        send_friend_info(info_json)
+    elif info_json['type'] == 'get_group_info':
+        send_group_info(info_json)
+    elif info_json['type'] == 'add_friend':
+        add_friend_request(info_json)
+    elif info_json['type'] == 'add_group':
+        add_group_request(info_json)
 
 
 # 接收连接请求

@@ -7,19 +7,34 @@ import time
 import wx
 
 import config.config as config
+import ui_design.detail as detail
 import ui_design.login as login
 
 
 class HomeFrame(wx.Frame):
     def __init__(self, parent, uid):
         super().__init__(parent=None, title="主界面", size=(800, 600))
+        self.group_show_head_img = None
+        self.group_show_introduction = None
+        self.group_show_group_name = None
+        self.group_show_gid = None
+        self.friend_info_frame_phone = None
+        self.friend_info_frame_email = None
+        self.friend_info_frame_age = None
+        self.friend_info_frame_sex = None
+        self.friend_info_frame_head_img = None
+        self.friend_info_frame_username = None
+        self.friend_info_frame_uid = None
+        self.friend_info_frame = None
+        self.add_friend_frame = None
+        friend_info_frame = None
         self.conn = None
         self.port = None
         self.id = 0
         self.uid = int(uid)
         self.client = None
         self.login_socket()
-        self.Bind(wx.EVT_CLOSE, self.on_close_window)
+        self.Bind(wx.EVT_CLOSE, self.logout)
         self.chat_msg = []
         self.Center()
         self.sp = wx.SplitterWindow(self)
@@ -92,10 +107,25 @@ class HomeFrame(wx.Frame):
         # 绑定退出登录事件
         self.logout_button.Bind(wx.EVT_BUTTON, self.back_to_login)
 
+        # 设置查看好友信息按钮
+        self.info_button = wx.Button(self.Panel_Right_Top, 1, label="", pos=(10, 18),
+                                     size=(110, 30))
+        self.info_button.SetFont(wx.Font(13, wx.SWISS, wx.NORMAL, wx.NORMAL))
+        # 绑定查看好友信息事件
+        self.info_button.Bind(wx.EVT_BUTTON, self.show_detail_info)
+
         # 设置好友信息
         self.info = wx.StaticText(self.Panel_Right_Top, 2, label="", pos=(int(config.WIDTH * 0.3), 20), size=(100, -1))
         self.info.SetFont(wx.Font(15, wx.SWISS, wx.NORMAL, wx.NORMAL))
         self.info.SetSize((100, 50))
+        #
+        # 设置添加好友按钮
+        #
+        self.add_friend_button = wx.Button(self.Panel_Right_Top, 1, label="添加好友", pos=(int(config.WIDTH * 0.6), 20),
+                                           size=(100, 30))
+        self.add_friend_button.SetFont(wx.Font(13, wx.SWISS, wx.NORMAL, wx.NORMAL))
+        # 绑定添加好友事件
+        self.add_friend_button.Bind(wx.EVT_BUTTON, self.get_add_friend_window)
         #
         # 设置聊天状态True为与好友聊天，False为与群聊聊天
         self.chat_ing = True
@@ -104,6 +134,116 @@ class HomeFrame(wx.Frame):
         self.friend_group_data = [[], []]
         self.load_friend_group_data()
         self.listen_receive_message()
+
+    def show_friend_info(self, data):
+        # 设置好友信息
+        self.friend_info_frame_uid.SetLabel("uid: " + str(data["uid"]))
+        self.friend_info_frame_age.SetLabel("age: " + str(data["age"]))
+        self.friend_info_frame_sex.SetLabel("sex:" + str(data["sex"]))
+        self.friend_info_frame_head_img.SetLabel("head_img: " + str(data["head_img"]))
+        self.friend_info_frame_email.SetLabel("email: " + str(data["email"]))
+        self.friend_info_frame_phone.SetLabel("phone: " + str(data["phone"]))
+
+    def show_group_info(self, data):
+        self.group_show_group_name.SetLabel("群聊名称: " + str(data["group_name"]))
+        self.group_show_gid.SetLabel("群聊id: " + str(data["gid"]))
+        self.group_show_head_img.SetLabel("群聊头像: " + str(data["head_img"]))
+        self.group_show_introduction.SetLabel("群聊简介: " + str(data["introduction"]))
+
+    # 加载添加好友窗口
+    def get_add_friend_window(self, event):
+        add_friend_frame = wx.Frame(None, title="添加好友和群聊", size=(300, 150))
+        add_friend_frame.Center()
+        add_friend_frame.SetBackgroundColour((220, 220, 220, 0.1))
+        self.add_friend_uid = wx.TextCtrl(add_friend_frame, 1, pos=(40, 10), size=(150, 30))
+        self.add_friend_btn = wx.Button(add_friend_frame, 2, label="添加好友uid/email/phone", pos=(10, 70),
+                                        size=(150, 30))
+        self.add_group_btn = wx.Button(add_friend_frame, 3, label="添加群聊", pos=(180, 70), size=(100, 30))
+        self.add_friend_btn.Bind(wx.EVT_BUTTON, self.add_friend_btn_func)
+        self.add_group_btn.Bind(wx.EVT_BUTTON, self.add_group_btn_func)
+        add_friend_frame.Show()
+
+    # 向服务器发送添加好友请求
+    def add_friend_btn_func(self, event):
+        if self.add_friend_uid.GetValue() == "":
+            wx.MessageBox("好友ID不能为空", "提示")
+            return
+        message = {"uid": self.uid, "type": "add_friend", "uid1": self.add_friend_uid.GetValue()}
+        self.client.send(json.dumps(message).encode("utf-8"))
+        self.add_friend_uid.SetValue("")
+
+    # 验证好友是否添加成功
+    def check_add_friend(self, data):
+        if data["code"]:
+            wx.MessageBox("成功!" + data['username'], "提示")
+            self.load_friend_group_data()
+        else:
+            wx.MessageBox("添加失败  " + data['data'], "提示")
+        self.add_friend_frame.Close()
+
+    # 验证群聊是否添加成功
+    def check_add_group(self, data):
+        if data["code"]:
+            wx.MessageBox("成功" + data['group_name'], "提示")
+            self.load_friend_group_data()
+        else:
+            wx.MessageBox("添加失败  " + data['data'], "提示")
+        self.add_friend_frame.Close()
+
+    # 向服务器发送添加群聊请求
+    def add_group_btn_func(self, event):
+        if self.add_friend_uid.GetValue() == "":
+            wx.MessageBox("请输入群聊号", "提示", wx.OK | wx.ICON_INFORMATION)
+            return
+        message = {"uid": self.uid, "type": "add_group", "gid": self.add_friend_uid.GetValue()}
+        self.client.send(json.dumps(message).encode("utf-8"))
+        self.add_friend_uid.SetValue("")
+
+    def show_detail_info(self, event):
+        if self.chat_ing:
+            friend_info_frame = wx.Frame(None, title="好友信息", size=(300, 300))
+            friend_info_frame.Center()
+            friend_info_frame.SetBackgroundColour((220, 220, 220, 0.1))
+            # 设置好友信息
+            self.friend_info_frame_uid = wx.StaticText(friend_info_frame, 1, label="uid:", pos=(10, 10),
+                                                       size=(100, -1))
+            self.friend_info_frame_uid.SetFont(wx.Font(15, wx.SWISS, wx.NORMAL, wx.NORMAL))
+
+            self.friend_info_frame_username = wx.StaticText(friend_info_frame, 2, label="username:",
+                                                            pos=(10, 40), size=(100, -1))
+            self.friend_info_frame_username.SetFont(wx.Font(15, wx.SWISS, wx.NORMAL, wx.NORMAL))
+            self.friend_info_frame_head_img = wx.StaticText(friend_info_frame, 3, label="head_img:",
+                                                            pos=(10, 70), size=(100, -1))
+            self.friend_info_frame_head_img.SetFont(wx.Font(15, wx.SWISS, wx.NORMAL, wx.NORMAL))
+            self.friend_info_frame_sex = wx.StaticText(friend_info_frame, 2, label="sex:",
+                                                       pos=(10, 100), size=(100, -1))
+            self.friend_info_frame_sex.SetFont(wx.Font(15, wx.SWISS, wx.NORMAL, wx.NORMAL))
+            self.friend_info_frame_age = wx.StaticText(friend_info_frame, 2, label="age:",
+                                                       pos=(10, 130), size=(100, -1))
+            self.friend_info_frame_age.SetFont(wx.Font(15, wx.SWISS, wx.NORMAL, wx.NORMAL))
+            self.friend_info_frame_phone = wx.StaticText(friend_info_frame, 2, label="phone:",
+                                                         pos=(10, 160), size=(100, -1))
+            self.friend_info_frame_phone.SetFont(wx.Font(15, wx.SWISS, wx.NORMAL, wx.NORMAL))
+            self.friend_info_frame_email = wx.StaticText(friend_info_frame, 2, label="email:",
+                                                         pos=(10, 190), size=(100, -1))
+            self.friend_info_frame_email.SetFont(wx.Font(15, wx.SWISS, wx.NORMAL, wx.NORMAL))
+            friend_info_frame.Show()
+            message = {"uid": self.uid, "type": "get_friend_info", "uid2": self.id}
+            self.client.send(json.dumps(message).encode("utf-8"))
+        else:
+            group = wx.Frame(None,title="群聊信息", size=(300, 150))
+            group.Center()
+            self.group_show_gid = wx.StaticText(group, 1, label="gid:", pos=(10, 10),
+                                                size=(250, -1))
+            self.group_show_group_name = wx.StaticText(group, 2, label="group_name:",
+                                                       pos=(10, 30), size=(250, -1))
+            self.group_show_head_img = wx.StaticText(group, 3, label="head_img:",
+                                                     pos=(10, 50), size=(250, -1))
+            self.group_show_introduction = wx.StaticText(group, 2, label="introduction:",
+                                                         pos=(10, 70), size=(250, -1))
+            group.Show()
+            message = {"uid": self.uid, "type": "get_group_info", "gid": self.id}
+            self.client.send(json.dumps(message).encode("utf-8"))
 
     # 登录创建socket连接告诉服务器登录的用户ip,port
     def login_socket(self):
@@ -138,6 +278,7 @@ class HomeFrame(wx.Frame):
             if self.friend_group_data[0][i]["username"] == event.GetString():
                 self.id = self.friend_group_data[0][i]["uid"]
                 self.load_friend_message()
+                self.info_button.SetLabel("查看好友信息")
                 self.chat_ing = True
                 break
 
@@ -145,6 +286,7 @@ class HomeFrame(wx.Frame):
             if self.friend_group_data[1][i]["group_name"] == event.GetString():
                 self.id = self.friend_group_data[1][i]["gid"]
                 self.load_group_message()
+                self.info_button.SetLabel("查看群聊信息")
                 self.chat_ing = False
                 break
         # 加载消息
@@ -187,7 +329,7 @@ class HomeFrame(wx.Frame):
             try:
                 data = self.client.recv(1024 * 3).decode('utf-8')
                 data = json.loads(data)
-                print(data)
+                # print(data)
                 if data['type'] == 'user_message':
                     if int(data['uid1']) == self.id and int(data['uid2']) == int(self.uid):
                         total = self.Text.GetItemCount()
@@ -218,6 +360,14 @@ class HomeFrame(wx.Frame):
                     self.set_user_message(data['data'])
                 elif data['type'] == 'group_message_list':
                     self.set_group_message(data['data'])
+                elif data['type'] == 'friend_info':
+                    self.show_friend_info(data['data'])
+                elif data['type'] == 'group_info':
+                    self.show_group_info(data['data'])
+                elif data['type'] == 'add_friend_result':
+                    self.check_add_friend(data)
+                elif data['type'] == 'add_group_result':
+                    self.check_add_group(data)
                 time.sleep(0.5)
             except:
                 continue
@@ -257,7 +407,7 @@ class HomeFrame(wx.Frame):
                 self.Text.SetItem(indexItem, 2, "")
 
     def back_to_login(self, event):
-        self.on_close_window(event)
+        self.logout(event)
         app = wx.App()
         frame = login.LoginFrame(None, self.uid, None)
         frame.Show(True)
@@ -288,18 +438,8 @@ class HomeFrame(wx.Frame):
                 self.Text.SetItem(indexItem, 1, message_list[i]['message'])
                 self.Text.SetItem(indexItem, 2, "")
 
-    # 检测窗口关闭事件
-    def on_close_window(self, event):
-        toastone = wx.MessageDialog(None, "确定要退出系统吗？", "确认信息提示",
-                                    wx.YES_NO | wx.ICON_QUESTION)
-        if toastone.ShowModal() == wx.ID_YES:  # 如果点击了提示框的确定按钮
-            toastone.Destroy()  # 则关闭提示框
-            self.logout()
-        if toastone.ShowModal() == wx.ID_NO:
-            toastone.Destroy()  # 则关闭提示框
-
     # 退出登录，告诉服务器此账号已下线
-    def logout(self):
+    def logout(self, event):
         self.client.sendall(json.dumps({"type": "logout", "uid": self.uid}).encode('utf-8'))
         self.client.close()
         self.Destroy()

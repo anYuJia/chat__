@@ -94,7 +94,7 @@ class LoginFrame(wx.Frame):
             self.Close(True)
             app = wx.App()
             frame = home.HomeFrame(None, R[1])
-            frame.Show(True)
+            frame.Show()
             app.MainLoop()
         else:
             wx.MessageBox("登录失败,请检查一下账号密码", "提示", wx.OK | wx.ICON_INFORMATION)

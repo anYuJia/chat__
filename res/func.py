@@ -169,6 +169,91 @@ def get_group_message(gid) -> list:
     return message_list
 
 
+# 检测用户是否存在
+def check_user_exist(uid, email, phone) -> bool:
+    DB = db.connect_mysql()
+    cursor = DB[1]
+    check_user_exist_sql = "select * from user_detail where uid = %s or email = %s or phone = %s"
+    cursor.execute(check_user_exist_sql, (uid, email, phone))
+    user = cursor.fetchone()
+    db.close_cursor(DB)
+    if user is None:
+        return False
+    else:
+        return True
+
+
+# 添加好友
+def add_friend(uid1, uid2) -> bool:
+    DB = db.connect_mysql()
+    cursor = DB[1]
+    add_friend_sql = "insert into user_user(uid1,uid2) values(%s,%s)"
+    cursor.execute(add_friend_sql, (uid1, uid2))
+    DB[0].commit()
+    db.close_cursor(DB)
+    return True
+
+
+def add_group(uid, gid) -> bool:
+    DB = db.connect_mysql()
+    cursor = DB[1]
+    add_group_sql = "insert into user_group(uid,gid) values(%s,%s)"
+    cursor.execute(add_group_sql, (uid, gid))
+    DB[0].commit()
+    db.close_cursor(DB)
+    return True
+
+
+# 获取用户信息
+def get_user_info(uid) -> dict:
+    DB = db.connect_mysql()
+    cursor = DB[1]
+    get_user_info_sql = "select * from user_detail where uid = %s"
+    cursor.execute(get_user_info_sql, (uid,))
+    user_info = obj_to_dict(config.UserDetail(*cursor.fetchone()))
+    db.close_cursor(DB)
+    return user_info
+
+
+# 检查两个用户是否为好友
+def check_friend(uid1, uid2) -> bool:
+    DB = db.connect_mysql()
+    cursor = DB[1]
+    check_friend_sql = "select * from user_user where (uid1 = %s and uid2 = %s) or (uid1 = %s and uid2 = %s)"
+    cursor.execute(check_friend_sql, (uid1, uid2, uid2, uid1))
+    if cursor.fetchone() is None:
+        db.close_cursor(DB)
+        return False
+    else:
+        db.close_cursor(DB)
+        return True
+
+
+# 检查用户是否在群聊中
+def check_group(uid, gid) -> bool:
+    DB = db.connect_mysql()
+    cursor = DB[1]
+    check_group_sql = "select * from user_group where uid = %s and gid = %s"
+    cursor.execute(check_group_sql, (uid, gid))
+    if cursor.fetchone() is None:
+        db.close_cursor(DB)
+        return False
+    else:
+        db.close_cursor(DB)
+        return True
+
+
+# 获取群聊信息
+def get_group_info(gid) -> dict:
+    DB = db.connect_mysql()
+    cursor = DB[1]
+    get_group_info_sql = "select * from group_detail where gid = %s"
+    cursor.execute(get_group_info_sql, (gid,))
+    group_info = obj_to_dict(config.GroupDetail(*cursor.fetchone()))
+    db.close_cursor(DB)
+    return group_info
+
+
 def get_user_name(uid) -> str:
     DB = db.connect_mysql()
     cursor = DB[1]
@@ -187,6 +272,20 @@ def get_group_name(gid) -> str:
     group_name = cursor.fetchone()[0]
     db.close_cursor(DB)
     return group_name
+
+
+# 检测群聊是否存在
+def check_group_exist(gid) -> bool:
+    DB = db.connect_mysql()
+    cursor = DB[1]
+    check_group_exist_sql = "select * from group_detail where gid = %s"
+    cursor.execute(check_group_exist_sql, (gid,))
+    if cursor.fetchone() is None:
+        db.close_cursor(DB)
+        return False
+    else:
+        db.close_cursor(DB)
+        return True
 
 
 # 获取群聊成员
